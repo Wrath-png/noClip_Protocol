@@ -1281,6 +1281,8 @@ GameObject:
   - component: {fileID: 56121813}
   - component: {fileID: 56121812}
   - component: {fileID: 56121811}
+  - component: {fileID: 56121815}
+  - component: {fileID: 56121816}
   m_Layer: 8
   m_Name: easy (5)
   m_TagString: Enemy
@@ -1320,7 +1322,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1377,7 +1379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -1405,6 +1406,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &56121815
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56121809}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &56121816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56121809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &62501779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,6 +1786,8 @@ GameObject:
   - component: {fileID: 72471599}
   - component: {fileID: 72471598}
   - component: {fileID: 72471597}
+  - component: {fileID: 72471601}
+  - component: {fileID: 72471602}
   m_Layer: 8
   m_Name: easy (3)
   m_TagString: Enemy
@@ -1783,7 +1827,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1840,7 +1884,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -1868,6 +1911,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &72471601
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72471595}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &72471602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72471595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &77884068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,6 +3068,8 @@ GameObject:
   - component: {fileID: 130925002}
   - component: {fileID: 130925001}
   - component: {fileID: 130925000}
+  - component: {fileID: 130925004}
+  - component: {fileID: 130925005}
   m_Layer: 8
   m_Name: easy (16)
   m_TagString: Enemy
@@ -3023,7 +3109,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3080,7 +3166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -3110,6 +3195,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &130925004
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130924998}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &130925005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130924998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1001 &131720574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5440,6 +5566,8 @@ GameObject:
   - component: {fileID: 276216689}
   - component: {fileID: 276216688}
   - component: {fileID: 276216687}
+  - component: {fileID: 276216691}
+  - component: {fileID: 276216692}
   m_Layer: 8
   m_Name: easy (9)
   m_TagString: Enemy
@@ -5479,7 +5607,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5536,7 +5664,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -5566,6 +5693,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &276216691
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276216685}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &276216692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276216685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &295706692
 GameObject:
   m_ObjectHideFlags: 0
@@ -8252,6 +8420,8 @@ GameObject:
   - component: {fileID: 437899554}
   - component: {fileID: 437899553}
   - component: {fileID: 437899552}
+  - component: {fileID: 437899556}
+  - component: {fileID: 437899557}
   m_Layer: 8
   m_Name: easy (11)
   m_TagString: Enemy
@@ -8291,7 +8461,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -8348,7 +8518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -8378,6 +8547,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &437899556
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437899550}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &437899557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437899550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &440312682
 GameObject:
   m_ObjectHideFlags: 0
@@ -9004,6 +9214,8 @@ GameObject:
   - component: {fileID: 481884269}
   - component: {fileID: 481884268}
   - component: {fileID: 481884267}
+  - component: {fileID: 481884271}
+  - component: {fileID: 481884272}
   m_Layer: 8
   m_Name: easy (4)
   m_TagString: Enemy
@@ -9043,7 +9255,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -9100,7 +9312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -9128,6 +9339,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &481884271
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481884265}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &481884272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481884265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &490483781 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
@@ -12333,7 +12585,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1100, y: 508}
+  m_SizeDelta: {x: 1150, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &673986547
 GameObject:
@@ -13555,6 +13807,8 @@ GameObject:
   - component: {fileID: 721333177}
   - component: {fileID: 721333179}
   - component: {fileID: 721333180}
+  - component: {fileID: 721333181}
+  - component: {fileID: 721333182}
   m_Layer: 8
   m_Name: easy (1)
   m_TagString: Enemy
@@ -13606,7 +13860,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -13673,7 +13926,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -13681,6 +13934,47 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &721333181
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721333175}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &721333182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721333175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &735628740
 GameObject:
   m_ObjectHideFlags: 0
@@ -16550,6 +16844,8 @@ GameObject:
   - component: {fileID: 863278938}
   - component: {fileID: 863278937}
   - component: {fileID: 863278936}
+  - component: {fileID: 863278940}
+  - component: {fileID: 863278941}
   m_Layer: 8
   m_Name: easy (8)
   m_TagString: Enemy
@@ -16589,7 +16885,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -16646,7 +16942,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -16674,6 +16969,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &863278940
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863278934}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &863278941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863278934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &866010332
 GameObject:
   m_ObjectHideFlags: 0
@@ -17655,6 +17991,8 @@ GameObject:
   - component: {fileID: 951038341}
   - component: {fileID: 951038340}
   - component: {fileID: 951038339}
+  - component: {fileID: 951038343}
+  - component: {fileID: 951038344}
   m_Layer: 8
   m_Name: easy (13)
   m_TagString: Enemy
@@ -17694,7 +18032,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -17751,7 +18089,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -17781,6 +18118,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &951038343
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951038337}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &951038344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951038337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &953504757
 GameObject:
   m_ObjectHideFlags: 0
@@ -21264,6 +21642,8 @@ GameObject:
   - component: {fileID: 1124632075}
   - component: {fileID: 1124632074}
   - component: {fileID: 1124632073}
+  - component: {fileID: 1124632077}
+  - component: {fileID: 1124632078}
   m_Layer: 8
   m_Name: easy (14)
   m_TagString: Enemy
@@ -21303,7 +21683,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -21360,7 +21740,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -21388,6 +21767,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &1124632077
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124632071}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &1124632078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124632071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &1131080490
 GameObject:
   m_ObjectHideFlags: 0
@@ -22483,10 +22903,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!143 &1193962539
 CharacterController:
   m_ObjectHideFlags: 0
@@ -22584,6 +23004,27 @@ MonoBehaviour:
   gunShakeDur: 0.1
   textLeft: {fileID: 248455404}
   textRight: {fileID: 1286009115}
+--- !u!135 &1193962551
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193962537}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.01
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1194567929
 GameObject:
   m_ObjectHideFlags: 0
@@ -26309,6 +26750,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f7963ad356128f41a9d76698d592e4f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1193962548}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f7963ad356128f41a9d76698d592e4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1193962551}
     - targetCorrespondingSourceObject: {fileID: 837449258684898436, guid: 9f7963ad356128f41a9d76698d592e4f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1133385097}
@@ -30907,6 +31351,8 @@ GameObject:
   - component: {fileID: 1676557495}
   - component: {fileID: 1676557494}
   - component: {fileID: 1676557493}
+  - component: {fileID: 1676557497}
+  - component: {fileID: 1676557498}
   m_Layer: 8
   m_Name: easy (2)
   m_TagString: Enemy
@@ -30946,7 +31392,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -31003,7 +31449,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -31031,6 +31476,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &1676557497
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676557491}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &1676557498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676557491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &1692673412
 GameObject:
   m_ObjectHideFlags: 0
@@ -31154,6 +31640,8 @@ GameObject:
   - component: {fileID: 1693600294}
   - component: {fileID: 1693600293}
   - component: {fileID: 1693600292}
+  - component: {fileID: 1693600296}
+  - component: {fileID: 1693600297}
   m_Layer: 8
   m_Name: easy (6)
   m_TagString: Enemy
@@ -31193,7 +31681,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -31250,7 +31738,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -31280,6 +31767,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &1693600296
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693600290}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &1693600297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693600290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &1697813940
 GameObject:
   m_ObjectHideFlags: 0
@@ -31535,6 +32063,8 @@ GameObject:
   - component: {fileID: 1714585885}
   - component: {fileID: 1714585884}
   - component: {fileID: 1714585883}
+  - component: {fileID: 1714585887}
+  - component: {fileID: 1714585888}
   m_Layer: 8
   m_Name: easy (10)
   m_TagString: Enemy
@@ -31574,7 +32104,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -31631,7 +32161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -31659,6 +32188,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &1714585887
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714585881}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &1714585888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714585881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1001 &1721181731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33087,6 +33657,8 @@ GameObject:
   - component: {fileID: 1799569868}
   - component: {fileID: 1799569867}
   - component: {fileID: 1799569866}
+  - component: {fileID: 1799569870}
+  - component: {fileID: 1799569871}
   m_Layer: 8
   m_Name: easy (17)
   m_TagString: Enemy
@@ -33126,7 +33698,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -33183,7 +33755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -33213,6 +33784,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &1799569870
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799569864}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &1799569871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799569864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &1801727501
 GameObject:
   m_ObjectHideFlags: 0
@@ -34199,6 +34811,8 @@ GameObject:
   - component: {fileID: 1861367402}
   - component: {fileID: 1861367401}
   - component: {fileID: 1861367400}
+  - component: {fileID: 1861367404}
+  - component: {fileID: 1861367405}
   m_Layer: 8
   m_Name: easy (15)
   m_TagString: Enemy
@@ -34238,7 +34852,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -34295,7 +34909,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -34325,6 +34938,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &1861367404
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861367398}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &1861367405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861367398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &1861712695
 GameObject:
   m_ObjectHideFlags: 0
@@ -35020,6 +35674,8 @@ GameObject:
   - component: {fileID: 1876712290}
   - component: {fileID: 1876712289}
   - component: {fileID: 1876712288}
+  - component: {fileID: 1876712292}
+  - component: {fileID: 1876712293}
   m_Layer: 8
   m_Name: easy (12)
   m_TagString: Enemy
@@ -35059,7 +35715,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -35116,7 +35772,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -35146,6 +35801,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &1876712292
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876712286}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &1876712293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876712286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &1879191831
 GameObject:
   m_ObjectHideFlags: 0
@@ -37908,6 +38604,8 @@ GameObject:
   - component: {fileID: 2055291820}
   - component: {fileID: 2055291819}
   - component: {fileID: 2055291818}
+  - component: {fileID: 2055291822}
+  - component: {fileID: 2055291823}
   m_Layer: 8
   m_Name: easy (7)
   m_TagString: Enemy
@@ -37947,7 +38645,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -38004,7 +38702,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  contactDamage: 3
   curHealth: 25
   maxHealth: 25
   healthBar: {fileID: 0}
@@ -38032,6 +38729,47 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInLineOfSight: 0
   playerInAttackRange: 0
+--- !u!54 &2055291822
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055291816}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &2055291823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055291816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120b09a55818bf1499f2a375b5f9ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  interval: 1
 --- !u!1 &2055675079
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class SmallEnemyAI : MonoBehaviour
 {
     public float speed = 15;
-    public int contactDamage = 3;
     [SerializeField] float curHealth, maxHealth = 25;
     [SerializeField] EnemyHealthBar healthBar;
     public NavMeshAgent agent;
@@ -219,15 +218,16 @@ public class SmallEnemyAI : MonoBehaviour
         transform.LookAt(wanderPos);
     }
 
-    //Contact Damage
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Player")) {
-            PlayerActions actions = collision.gameObject.GetComponent<PlayerActions>();
-            if (actions != null) {
-                actions.TakeDamage(contactDamage);
-            }
-        }
-    }
+    // Contact Damage
+    // private void OnTriggerEnter(Collider other) {
+    //     if (other.CompareTag("Player")) {
+    //         Debug.Log("Hit the player!");
+    //         PlayerActions actions = other.GetComponent<PlayerActions>();
+    //         if (actions != null) {
+    //             actions.TakeDamage(contactDamage);
+    //         }
+    //     }
+    // }
 
     public void TakeDamage(int damage) {
         curHealth -= damage;
