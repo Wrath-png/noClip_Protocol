@@ -45,6 +45,8 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (MainMenu.IsPaused) return;  //Check if paused
+
         if (transform.position.y != 10) {
             Vector3 newPosition = transform.position;
             newPosition.y = 10; // Force y to be 10

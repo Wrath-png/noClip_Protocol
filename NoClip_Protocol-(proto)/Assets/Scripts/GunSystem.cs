@@ -184,7 +184,7 @@ public class GunSystem : MonoBehaviour
     }
 
     private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact) {
-        Debug.Log("In Spawn Trail");
+        //Debug.Log("In Spawn Trail");
         Vector3 startPosition = Trail.transform.position;
         float distance = Vector3.Distance(Trail.transform.position, HitPoint);
         float remainingDistance = distance;
@@ -218,6 +218,7 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (MainMenu.IsPaused) return;  //Check if paused
         MyInput();
         //Set Text
         textLeft.SetText(bulletsLeft + " / " + magSize);

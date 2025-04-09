@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class BGM : MonoBehaviour
 {
-    public static BGM instance;
+    //public static BGM instance;
     private AudioSource audioSource;
     public List<AudioClip> AudioClips;
     // "ODDVIBE - Hatchback Racer"
@@ -18,6 +18,7 @@ public class BGM : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         clipDictionary = new Dictionary<string, AudioClip>();
         foreach (var clip in AudioClips) {
             clipDictionary[clip.name] = clip; // Store using the clip's name
@@ -31,17 +32,17 @@ public class BGM : MonoBehaviour
         
     }
 
-    void Awake() {
-        if (instance == null) {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Keep music playing across scenes
-        }
-        else {
-            Destroy(gameObject); // Prevent duplicates
-        }
+    // void Awake() {
+    //     if (instance == null) {
+    //         instance = this;
+    //         DontDestroyOnLoad(gameObject); // Keep music playing across scenes
+    //     }
+    //     else {
+    //         Destroy(gameObject); // Prevent duplicates
+    //     }
 
-        audioSource = GetComponent<AudioSource>();
-    }
+    //     audioSource = GetComponent<AudioSource>();
+    // }
 
     public void SetMusic(string clipName)
     {
