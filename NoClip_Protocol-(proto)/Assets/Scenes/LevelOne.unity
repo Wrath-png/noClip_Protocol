@@ -23108,7 +23108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d2fbd1abacb8345a17cbbbddb1c283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 8
   timeBetweenShooting: 0.1
   spread: 0.5
   range: 25
@@ -23117,7 +23117,7 @@ MonoBehaviour:
   timeBetweenShots: 0.01
   magSize: 2
   bulletsPerTap: 1
-  pelletCount: 30
+  pelletCount: 12
   allowButtonHold: 0
   LeftMuzzle: {fileID: 815802081}
   RightMuzzle: {fileID: 124770393}
