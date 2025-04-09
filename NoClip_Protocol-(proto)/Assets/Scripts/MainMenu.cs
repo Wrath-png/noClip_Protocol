@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
     
     private static MainMenu instance;
     private GameObject prevMenu;
-    public GameObject mainMenuUI, pauseMenuUI, optionsMenuUI, optionsBackground; // Assign the menu panel here
+    public GameObject mainMenuUI, pauseMenuUI, pauseBlurVolume, optionsMenuUI, optionsBackground; // Assign the menu panel here
     public static bool IsPaused { get; private set; } = false;
     private bool isPaused = false;
     public BGM bgm;
@@ -42,6 +42,8 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
+
+        pauseBlurVolume.SetActive(isPaused);
     }
     public void ResumeGame()
     {
