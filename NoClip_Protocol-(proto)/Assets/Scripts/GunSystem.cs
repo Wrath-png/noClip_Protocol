@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -6,7 +7,8 @@ public class GunSystem : MonoBehaviour
 {
     //Gun stats
     public int damage;
-    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, spread, range, reloadTime, bulletSpeed, timeBetweenShots;
+    //Bullet Speed default 200
     public int magSize, bulletsPerTap, pelletCount;
     public bool allowButtonHold;
     int bulletsLeft, bulletsRight, pelletsShot, currentGun;
@@ -27,6 +29,7 @@ public class GunSystem : MonoBehaviour
     public LayerMask canHit;
     //Graphics
     public GameObject muzzleFlash, bulletHoleGraphic;
+    [SerializeField] private TrailRenderer BulletTrail;
     public CameraShake camShake;
     public GunShake gunShake;
     public float camShakeMag, camShakeDur, gunShakeMag, gunShakeDur;
@@ -81,9 +84,12 @@ public class GunSystem : MonoBehaviour
             //Calculate Direction with Spread
             Vector3 direction = (-LeftMuzzle.up + LeftMuzzle.TransformDirection(new Vector3(x, 0, y))).normalized;
             if (Physics.Raycast(LeftMuzzle.position, direction, out hit, range, canHit)) {
-                //Debug.Log("Raycast sent");
+                
+                TrailRenderer trail = Instantiate(BulletTrail, LeftMuzzle.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                
                 Debug.DrawRay(LeftMuzzle.position, direction * range, Color.red, 2f);
-                //Debug.Log(hit.collider.name);
+                
 
                 if (hit.collider.CompareTag("Enemy")) {
                     SmallEnemyAI enemyAI = hit.collider.GetComponent<SmallEnemyAI>();
@@ -97,10 +103,15 @@ public class GunSystem : MonoBehaviour
                         dummy.TakeDamage(damage);
                     }
                 }
-                if (hit.normal != Vector3.zero) { // Ensure the normal is valid
-                    //Instantiate(rockParticle, hit.point, Quaternion.LookRotation(hit.normal));
-                    Instantiate(bulletHoleGraphic, hit.point, Quaternion.LookRotation(hit.normal));
-                }
+                // if (hit.normal != Vector3.zero) { // Ensure the normal is valid
+                //     //Instantiate(rockParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                //     Instantiate(bulletHoleGraphic, hit.point, Quaternion.LookRotation(hit.normal));
+                // }
+            }
+            else {
+                //Will show Trails even if nothing is hit.
+                TrailRenderer trail = Instantiate(BulletTrail, LeftMuzzle.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, LeftMuzzle.position + direction * range, Vector3.zero, false));
             }
         }
 
@@ -109,22 +120,25 @@ public class GunSystem : MonoBehaviour
         // }
         Invoke("ResetShot", timeBetweenShooting);
     }
-     private void ShootRight() {
+    private void ShootRight() {
         readyToShoot = false;
         rightAudio.PlayOneShot(shotgunSound);
         for (pelletsShot = 0; pelletsShot < pelletCount; pelletsShot++) {
-            //Debug.Log("In Shoot Right");
+            //Debug.Log("In Shoot Left");
 
             //Shot Spread
             float x = Random.Range(-spread, spread);
             float y = Random.Range(-spread, spread); 
 
-             //Calculate Direction with Spread
+            //Calculate Direction with Spread
             Vector3 direction = (-RightMuzzle.up + RightMuzzle.TransformDirection(new Vector3(x, 0, y))).normalized;
             if (Physics.Raycast(RightMuzzle.position, direction, out hit, range, canHit)) {
-                //Debug.Log("Raycast sent");
+                
+                TrailRenderer trail = Instantiate(BulletTrail, RightMuzzle.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                
                 Debug.DrawRay(RightMuzzle.position, direction * range, Color.red, 2f);
-                //Debug.Log(hit.collider.name);
+                
 
                 if (hit.collider.CompareTag("Enemy")) {
                     SmallEnemyAI enemyAI = hit.collider.GetComponent<SmallEnemyAI>();
@@ -138,10 +152,15 @@ public class GunSystem : MonoBehaviour
                         dummy.TakeDamage(damage);
                     }
                 }
-                if (hit.normal != Vector3.zero) { // Ensure the normal is valid
-                    //Instantiate(rockParticle, hit.point, Quaternion.LookRotation(hit.normal));
-                    Instantiate(bulletHoleGraphic, hit.point, Quaternion.LookRotation(hit.normal));
-                }
+                // if (hit.normal != Vector3.zero) { // Ensure the normal is valid
+                //     //Instantiate(rockParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                //     Instantiate(bulletHoleGraphic, hit.point, Quaternion.LookRotation(hit.normal));
+                // }
+            }
+            else {
+                //Will show Trails even if nothing is hit.
+                TrailRenderer trail = Instantiate(BulletTrail, RightMuzzle.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, RightMuzzle.position + direction * range, Vector3.zero, false));
             }
         }
 
@@ -163,7 +182,31 @@ public class GunSystem : MonoBehaviour
         bulletsRight = magSize;
         reloading = false;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact) {
+        Debug.Log("In Spawn Trail");
+        Vector3 startPosition = Trail.transform.position;
+        float distance = Vector3.Distance(Trail.transform.position, HitPoint);
+        float remainingDistance = distance;
+
+        if (distance == 0) yield break;
+
+        while (remainingDistance > 0) {
+            Trail.transform.position = Vector3.Lerp(startPosition, HitPoint, 1 - (remainingDistance / distance));
+
+            remainingDistance -= bulletSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+        Trail.transform.position = HitPoint;
+        if (MadeImpact)
+        {
+            Instantiate(bulletHoleGraphic, HitPoint, Quaternion.LookRotation(HitNormal));
+        }
+
+        Destroy(Trail.gameObject, Trail.time);
+    
+    }
     void Start()
     {
         bulletsLeft = magSize;
