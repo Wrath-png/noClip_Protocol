@@ -12,10 +12,11 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _BUILTIN_SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
+  - _ALPHAPREMULTIPLY_ON
   - _ALPHATEST_ON
+  - _BUILTIN_SURFACE_TYPE_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -166,7 +167,7 @@ Material:
     - _SoftParticles: 20
     - _Soft_Particle: 170.9
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Strech: 0
     - _StrechY: 0
