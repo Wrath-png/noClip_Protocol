@@ -18,7 +18,7 @@ public class PatrolState : EnemyState
             return;
         }
         if (enemy.waiting) {
-            enemy.WaitAtWaypoint();
+            enemy.WaitAtPoint();
             return;
         }
         if (enemy.AtWaypoint() && !enemy.hasWaited) {
@@ -31,6 +31,6 @@ public class PatrolState : EnemyState
 
     public override void Exit()
     {
-        
+
     }
 }

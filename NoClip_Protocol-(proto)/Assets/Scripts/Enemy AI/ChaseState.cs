@@ -16,11 +16,14 @@ public class ChaseState : EnemyState
     {
         if (!enemy.CanSeePlayer())
         {
-            enemy.TransitionToState(new PatrolState(enemy));
-            return;
+            if (!enemy.RememberLocation()) 
+            {
+                enemy.TransitionToState(new PatrolState(enemy));
+                return;
+            }
         }
 
-        if (enemy.InAttackRange())
+        if (enemy.enableAttack && enemy.InAttackRange())
         {
             enemy.TransitionToState(new AttackState(enemy));
             return;
@@ -31,7 +34,7 @@ public class ChaseState : EnemyState
 
     public override void Exit()
     {
-        // Reset chasing flags or stop animation if necessary
+
     }
 }
 

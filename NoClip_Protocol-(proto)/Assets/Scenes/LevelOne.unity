@@ -824,9 +824,8 @@ GameObject:
   m_Component:
   - component: {fileID: 48612570}
   - component: {fileID: 48612572}
-  - component: {fileID: 48612571}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,20 +852,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &48612571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48612569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 48612572}
-  healthPercent: 0
 --- !u!114 &48612572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,9 +1051,8 @@ GameObject:
   m_Component:
   - component: {fileID: 50760610}
   - component: {fileID: 50760612}
-  - component: {fileID: 50760611}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,20 +1079,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &50760611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50760609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 50760612}
-  healthPercent: 0
 --- !u!114 &50760612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,6 +1253,9 @@ GameObject:
   - component: {fileID: 56121811}
   - component: {fileID: 56121815}
   - component: {fileID: 56121816}
+  - component: {fileID: 56121818}
+  - component: {fileID: 56121817}
+  - component: {fileID: 56121819}
   m_Layer: 8
   m_Name: easy (5)
   m_TagString: Enemy
@@ -1378,12 +1351,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 56121812}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 854233116}
+  - {fileID: 661884660}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -1391,21 +1375,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 854233116}
-  - {fileID: 661884660}
   animationStateChanger: {fileID: 56121813}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &56121815
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1447,6 +1422,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &56121817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56121809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &56121818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56121809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &56121819
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56121809}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &62501779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,6 +1813,9 @@ GameObject:
   - component: {fileID: 72471597}
   - component: {fileID: 72471601}
   - component: {fileID: 72471602}
+  - component: {fileID: 72471604}
+  - component: {fileID: 72471603}
+  - component: {fileID: 72471605}
   m_Layer: 8
   m_Name: easy (3)
   m_TagString: Enemy
@@ -1883,12 +1911,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 72471598}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1117060214}
+  - {fileID: 2144731672}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -1896,21 +1935,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1117060214}
-  - {fileID: 2144731672}
   animationStateChanger: {fileID: 72471599}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &72471601
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1952,6 +1982,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &72471603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72471595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &72471604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72471595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &72471605
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72471595}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &77884068
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,6 +3150,9 @@ GameObject:
   - component: {fileID: 130925000}
   - component: {fileID: 130925004}
   - component: {fileID: 130925005}
+  - component: {fileID: 130925007}
+  - component: {fileID: 130925006}
+  - component: {fileID: 130925008}
   m_Layer: 8
   m_Name: easy (16)
   m_TagString: Enemy
@@ -3165,12 +3248,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 130925001}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1669493948}
+  - {fileID: 1046417139}
+  - {fileID: 1013250542}
+  - {fileID: 1046417139}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -3178,23 +3274,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1669493948}
-  - {fileID: 1046417139}
-  - {fileID: 1013250542}
-  - {fileID: 1046417139}
   animationStateChanger: {fileID: 130925002}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &130925004
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3236,6 +3321,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &130925006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130924998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &130925007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130924998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &130925008
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130924998}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1001 &131720574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4859,9 +4994,8 @@ GameObject:
   m_Component:
   - component: {fileID: 241870635}
   - component: {fileID: 241870637}
-  - component: {fileID: 241870636}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4888,20 +5022,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &241870636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241870634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 241870637}
-  healthPercent: 0
 --- !u!114 &241870637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5568,6 +5688,9 @@ GameObject:
   - component: {fileID: 276216687}
   - component: {fileID: 276216691}
   - component: {fileID: 276216692}
+  - component: {fileID: 276216694}
+  - component: {fileID: 276216693}
+  - component: {fileID: 276216695}
   m_Layer: 8
   m_Name: easy (9)
   m_TagString: Enemy
@@ -5663,12 +5786,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 276216688}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1692673413}
+  - {fileID: 602944419}
+  - {fileID: 463640071}
+  - {fileID: 201822834}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -5676,23 +5812,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1692673413}
-  - {fileID: 602944419}
-  - {fileID: 463640071}
-  - {fileID: 201822834}
   animationStateChanger: {fileID: 276216689}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &276216691
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5734,6 +5859,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &276216693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276216685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &276216694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276216685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &276216695
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276216685}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &295706692
 GameObject:
   m_ObjectHideFlags: 0
@@ -8465,6 +8640,9 @@ GameObject:
   - component: {fileID: 437899552}
   - component: {fileID: 437899556}
   - component: {fileID: 437899557}
+  - component: {fileID: 437899559}
+  - component: {fileID: 437899558}
+  - component: {fileID: 437899560}
   m_Layer: 8
   m_Name: easy (11)
   m_TagString: Enemy
@@ -8560,12 +8738,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 437899553}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 642770909}
+  - {fileID: 400962423}
+  - {fileID: 147925681}
+  - {fileID: 42500076}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -8573,23 +8764,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 642770909}
-  - {fileID: 400962423}
-  - {fileID: 147925681}
-  - {fileID: 42500076}
   animationStateChanger: {fileID: 437899554}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &437899556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8631,6 +8811,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &437899558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437899550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &437899559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437899550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &437899560
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437899550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &440312682
 GameObject:
   m_ObjectHideFlags: 0
@@ -9150,9 +9380,8 @@ GameObject:
   m_Component:
   - component: {fileID: 481599348}
   - component: {fileID: 481599350}
-  - component: {fileID: 481599349}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9179,20 +9408,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &481599349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481599347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 481599350}
-  healthPercent: 0
 --- !u!114 &481599350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9259,6 +9474,9 @@ GameObject:
   - component: {fileID: 481884267}
   - component: {fileID: 481884271}
   - component: {fileID: 481884272}
+  - component: {fileID: 481884274}
+  - component: {fileID: 481884273}
+  - component: {fileID: 481884275}
   m_Layer: 8
   m_Name: easy (4)
   m_TagString: Enemy
@@ -9354,12 +9572,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 481884268}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 600475501}
+  - {fileID: 854233116}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -9367,21 +9596,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 600475501}
-  - {fileID: 854233116}
   animationStateChanger: {fileID: 481884269}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &481884271
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9423,6 +9643,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &481884273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481884265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &481884274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481884265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &481884275
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481884265}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &490483781 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
@@ -10577,9 +10847,8 @@ GameObject:
   m_Component:
   - component: {fileID: 572075584}
   - component: {fileID: 572075586}
-  - component: {fileID: 572075585}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10606,20 +10875,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &572075585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572075583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 572075586}
-  healthPercent: 0
 --- !u!114 &572075586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11881,9 +12136,8 @@ GameObject:
   m_Component:
   - component: {fileID: 643304098}
   - component: {fileID: 643304100}
-  - component: {fileID: 643304099}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11910,20 +12164,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &643304099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 643304097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 643304100}
-  healthPercent: 0
 --- !u!114 &643304100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12351,9 +12591,8 @@ GameObject:
   m_Component:
   - component: {fileID: 661715884}
   - component: {fileID: 661715886}
-  - component: {fileID: 661715885}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12380,20 +12619,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &661715885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661715883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 661715886}
-  healthPercent: 0
 --- !u!114 &661715886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13743,9 +13968,8 @@ GameObject:
   m_Component:
   - component: {fileID: 719803355}
   - component: {fileID: 719803357}
-  - component: {fileID: 719803356}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13772,20 +13996,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &719803356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719803354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 719803357}
-  healthPercent: 0
 --- !u!114 &719803357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13852,6 +14062,9 @@ GameObject:
   - component: {fileID: 721333180}
   - component: {fileID: 721333181}
   - component: {fileID: 721333182}
+  - component: {fileID: 721333184}
+  - component: {fileID: 721333183}
+  - component: {fileID: 721333185}
   m_Layer: 8
   m_Name: easy (1)
   m_TagString: Enemy
@@ -13902,12 +14115,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 721333179}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1117060214}
+  - {fileID: 1371047553}
+  - {fileID: 506585115}
+  - {fileID: 1113699743}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -13915,23 +14141,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1117060214}
-  - {fileID: 1371047553}
-  - {fileID: 506585115}
-  - {fileID: 1113699743}
   animationStateChanger: {fileID: 721333177}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!195 &721333179
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -14018,6 +14233,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &721333183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721333175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &721333184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721333175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &721333185
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721333175}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &735628740
 GameObject:
   m_ObjectHideFlags: 0
@@ -14812,6 +15077,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760795336}
   m_CullTransparentMesh: 1
+--- !u!4 &762069461 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8241289334867904660, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
+  m_PrefabInstance: {fileID: 1119678102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &769777599
 GameObject:
   m_ObjectHideFlags: 0
@@ -15343,9 +15613,8 @@ GameObject:
   m_Component:
   - component: {fileID: 806925063}
   - component: {fileID: 806925065}
-  - component: {fileID: 806925064}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15372,20 +15641,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &806925064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 806925062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 806925065}
-  healthPercent: 0
 --- !u!114 &806925065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16435,9 +16690,8 @@ GameObject:
   m_Component:
   - component: {fileID: 849793245}
   - component: {fileID: 849793247}
-  - component: {fileID: 849793246}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16464,20 +16718,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &849793246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 849793244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 849793247}
-  healthPercent: 0
 --- !u!114 &849793247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16978,6 +17218,9 @@ GameObject:
   - component: {fileID: 863278936}
   - component: {fileID: 863278940}
   - component: {fileID: 863278941}
+  - component: {fileID: 863278943}
+  - component: {fileID: 863278942}
+  - component: {fileID: 863278944}
   m_Layer: 8
   m_Name: easy (8)
   m_TagString: Enemy
@@ -17073,12 +17316,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 863278937}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1872692663}
+  - {fileID: 1998044728}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -17086,21 +17340,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1872692663}
-  - {fileID: 1998044728}
   animationStateChanger: {fileID: 863278938}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &863278940
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17142,6 +17387,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &863278942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863278934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &863278943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863278934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &863278944
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863278934}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &866010332
 GameObject:
   m_ObjectHideFlags: 0
@@ -17371,9 +17666,8 @@ GameObject:
   m_Component:
   - component: {fileID: 906450880}
   - component: {fileID: 906450882}
-  - component: {fileID: 906450881}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17400,20 +17694,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &906450881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 906450879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 906450882}
-  healthPercent: 0
 --- !u!114 &906450882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18125,6 +18405,9 @@ GameObject:
   - component: {fileID: 951038339}
   - component: {fileID: 951038343}
   - component: {fileID: 951038344}
+  - component: {fileID: 951038346}
+  - component: {fileID: 951038345}
+  - component: {fileID: 951038347}
   m_Layer: 8
   m_Name: easy (13)
   m_TagString: Enemy
@@ -18220,12 +18503,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 951038340}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1021126785}
+  - {fileID: 1570607276}
+  - {fileID: 2021364510}
+  - {fileID: 1676486615}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -18233,23 +18529,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1021126785}
-  - {fileID: 1570607276}
-  - {fileID: 2021364510}
-  - {fileID: 1676486615}
   animationStateChanger: {fileID: 951038341}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &951038343
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18291,6 +18576,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &951038345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951038337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &951038346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951038337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &951038347
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951038337}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &953504757
 GameObject:
   m_ObjectHideFlags: 0
@@ -19787,9 +20122,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1015339362}
   - component: {fileID: 1015339364}
-  - component: {fileID: 1015339363}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19816,20 +20150,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1015339363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015339361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 1015339364}
-  healthPercent: 0
 --- !u!114 &1015339364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20076,9 +20396,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1034985157}
   - component: {fileID: 1034985159}
-  - component: {fileID: 1034985158}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20105,20 +20424,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1034985158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034985156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 1034985159}
-  healthPercent: 0
 --- !u!114 &1034985159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21776,6 +22081,9 @@ GameObject:
   - component: {fileID: 1124632073}
   - component: {fileID: 1124632077}
   - component: {fileID: 1124632078}
+  - component: {fileID: 1124632080}
+  - component: {fileID: 1124632079}
+  - component: {fileID: 1124632081}
   m_Layer: 8
   m_Name: easy (14)
   m_TagString: Enemy
@@ -21871,12 +22179,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 1124632074}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1559300168}
+  - {fileID: 749115077}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -21884,21 +22203,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1559300168}
-  - {fileID: 749115077}
   animationStateChanger: {fileID: 1124632075}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &1124632077
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21940,6 +22250,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &1124632079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124632071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &1124632080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124632071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &1124632081
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124632071}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &1131080490
 GameObject:
   m_ObjectHideFlags: 0
@@ -22160,9 +22520,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1145344770}
   - component: {fileID: 1145344772}
-  - component: {fileID: 1145344771}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22189,20 +22548,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1145344771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145344769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 1145344772}
-  healthPercent: 0
 --- !u!114 &1145344772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23090,7 +23435,7 @@ MonoBehaviour:
   curHealth: 0
   maxHealth: 100
   NoClipenergy: 10
-  Speed: 20
+  Speed: 30
   JumpForce: 0
   Sensetivity: 8
   Gravity: 0
@@ -23157,7 +23502,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.01
+  m_Radius: 0.008
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1194567929
 GameObject:
@@ -31486,12 +31831,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1676557492}
-  - component: {fileID: 1676557496}
-  - component: {fileID: 1676557495}
   - component: {fileID: 1676557494}
   - component: {fileID: 1676557493}
   - component: {fileID: 1676557497}
+  - component: {fileID: 1676557495}
+  - component: {fileID: 1676557496}
   - component: {fileID: 1676557498}
+  - component: {fileID: 1676557500}
+  - component: {fileID: 1676557499}
+  - component: {fileID: 1676557502}
+  - component: {fileID: 1676557501}
+  - component: {fileID: 1676557503}
   m_Layer: 8
   m_Name: easy (2)
   m_TagString: Enemy
@@ -31587,12 +31937,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 1676557494}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 50
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 45
+  wanderTime: 5
+  damageMultiplier: 5
+  memory: 2
+  enableAttack: 1
+  enableWander: 1
+  enablePatrol: 0
+  enableChase: 1
+  waypoints:
+  - {fileID: 1825053647}
+  - {fileID: 600475501}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -31600,21 +31961,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1825053647}
-  - {fileID: 600475501}
   animationStateChanger: {fileID: 1676557495}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &1676557497
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31656,6 +32008,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &1676557499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676557491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f8a5214e7b9e34caec52d70adb0319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunSelector: {fileID: 1676557500}
+--- !u!114 &1676557500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676557491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf98777e9fe09345be18a9a1e534af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gun: 2
+  GunParent: {fileID: 762069461}
+  Guns:
+  - {fileID: 11400000, guid: e939dd8a92e75a1448ab5a0aa756fea4, type: 2}
+  - {fileID: 11400000, guid: d53797eb31dc53441a2926cb834b3642, type: 2}
+  - {fileID: 11400000, guid: 2d402bcf486b2694480980adaa4d813c, type: 2}
+  ActiveGun: {fileID: 0}
+--- !u!114 &1676557501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676557491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &1676557502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676557491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &1676557503
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676557491}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1001 &1685944293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31710,6 +32144,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014129045996, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000011677292056, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000012283690144, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000012368742472, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000013564453862, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -31842,6 +32292,9 @@ GameObject:
   - component: {fileID: 1693600292}
   - component: {fileID: 1693600296}
   - component: {fileID: 1693600297}
+  - component: {fileID: 1693600299}
+  - component: {fileID: 1693600298}
+  - component: {fileID: 1693600300}
   m_Layer: 8
   m_Name: easy (6)
   m_TagString: Enemy
@@ -31937,12 +32390,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 1693600293}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 391155195}
+  - {fileID: 608919458}
+  - {fileID: 66586172}
+  - {fileID: 1182126965}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -31950,23 +32416,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 391155195}
-  - {fileID: 608919458}
-  - {fileID: 66586172}
-  - {fileID: 1182126965}
   animationStateChanger: {fileID: 1693600294}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &1693600296
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32008,6 +32463,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &1693600298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693600290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &1693600299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693600290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &1693600300
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693600290}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &1697813940
 GameObject:
   m_ObjectHideFlags: 0
@@ -32265,6 +32770,9 @@ GameObject:
   - component: {fileID: 1714585883}
   - component: {fileID: 1714585887}
   - component: {fileID: 1714585888}
+  - component: {fileID: 1714585890}
+  - component: {fileID: 1714585889}
+  - component: {fileID: 1714585891}
   m_Layer: 8
   m_Name: easy (10)
   m_TagString: Enemy
@@ -32360,12 +32868,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 1714585884}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1177252801}
+  - {fileID: 201822834}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -32373,21 +32892,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1177252801}
-  - {fileID: 201822834}
   animationStateChanger: {fileID: 1714585885}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &1714585887
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32429,6 +32939,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &1714585889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714585881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &1714585890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714585881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &1714585891
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714585881}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1001 &1721181731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33859,6 +34419,9 @@ GameObject:
   - component: {fileID: 1799569866}
   - component: {fileID: 1799569870}
   - component: {fileID: 1799569871}
+  - component: {fileID: 1799569873}
+  - component: {fileID: 1799569872}
+  - component: {fileID: 1799569874}
   m_Layer: 8
   m_Name: easy (17)
   m_TagString: Enemy
@@ -33954,12 +34517,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 1799569867}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 10407278}
+  - {fileID: 641162129}
+  - {fileID: 1534311180}
+  - {fileID: 581446381}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -33967,23 +34543,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 10407278}
-  - {fileID: 641162129}
-  - {fileID: 1534311180}
-  - {fileID: 581446381}
   animationStateChanger: {fileID: 1799569868}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &1799569870
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34025,6 +34590,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &1799569872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799569864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &1799569873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799569864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &1799569874
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799569864}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &1801727501
 GameObject:
   m_ObjectHideFlags: 0
@@ -34398,9 +35013,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1839078165}
   - component: {fileID: 1839078167}
-  - component: {fileID: 1839078166}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34427,20 +35041,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1839078166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839078164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 1839078167}
-  healthPercent: 0
 --- !u!114 &1839078167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35013,6 +35613,9 @@ GameObject:
   - component: {fileID: 1861367400}
   - component: {fileID: 1861367404}
   - component: {fileID: 1861367405}
+  - component: {fileID: 1861367407}
+  - component: {fileID: 1861367406}
+  - component: {fileID: 1861367408}
   m_Layer: 8
   m_Name: easy (15)
   m_TagString: Enemy
@@ -35108,12 +35711,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 1861367401}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1190161171}
+  - {fileID: 2024952274}
+  - {fileID: 1190161171}
+  - {fileID: 1669493948}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -35121,23 +35737,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1190161171}
-  - {fileID: 2024952274}
-  - {fileID: 1190161171}
-  - {fileID: 1669493948}
   animationStateChanger: {fileID: 1861367402}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &1861367404
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35179,6 +35784,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &1861367406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861367398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &1861367407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861367398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &1861367408
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861367398}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &1861712695
 GameObject:
   m_ObjectHideFlags: 0
@@ -35876,6 +36531,9 @@ GameObject:
   - component: {fileID: 1876712288}
   - component: {fileID: 1876712292}
   - component: {fileID: 1876712293}
+  - component: {fileID: 1876712295}
+  - component: {fileID: 1876712294}
+  - component: {fileID: 1876712296}
   m_Layer: 8
   m_Name: easy (12)
   m_TagString: Enemy
@@ -35971,12 +36629,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 1876712289}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 243081634}
+  - {fileID: 682020508}
+  - {fileID: 375590801}
+  - {fileID: 1465208209}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -35984,23 +36655,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 243081634}
-  - {fileID: 682020508}
-  - {fileID: 375590801}
-  - {fileID: 1465208209}
   animationStateChanger: {fileID: 1876712290}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &1876712292
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36042,6 +36702,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &1876712294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876712286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &1876712295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876712286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &1876712296
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876712286}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &1879191831
 GameObject:
   m_ObjectHideFlags: 0
@@ -36268,9 +36978,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1887356511}
   - component: {fileID: 1887356513}
-  - component: {fileID: 1887356512}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36297,20 +37006,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1887356512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887356510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 1887356513}
-  healthPercent: 0
 --- !u!114 &1887356513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38806,6 +39501,9 @@ GameObject:
   - component: {fileID: 2055291818}
   - component: {fileID: 2055291822}
   - component: {fileID: 2055291823}
+  - component: {fileID: 2055291825}
+  - component: {fileID: 2055291824}
+  - component: {fileID: 2055291826}
   m_Layer: 8
   m_Name: easy (7)
   m_TagString: Enemy
@@ -38901,12 +39599,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127c6efa248edff4cbf198604bdaef9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  curHealth: 25
-  maxHealth: 25
-  healthBar: {fileID: 0}
-  agent: {fileID: 2055291819}
-  player: {fileID: 1193962543}
+  sightRange: 90
+  attackRange: 1
+  speed: 0
+  waitTime: 2
+  timeBetweenAttacks: 1
+  wandering: 0
+  wanderRadius: 10
+  wanderTime: 5
+  damageMultiplier: 1
+  memory: 2
+  enableAttack: 1
+  enableWander: 0
+  enablePatrol: 1
+  enableChase: 1
+  waypoints:
+  - {fileID: 1532829357}
+  - {fileID: 1811520953}
   head: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
@@ -38914,21 +39623,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoints:
-  - {fileID: 1532829357}
-  - {fileID: 1811520953}
   animationStateChanger: {fileID: 2055291820}
+  attack: {fileID: 0}
+  waiting: 0
+  hasWaited: 0
   idleState: idle
   lookAroundState: LookAround
-  waitTime: 2
-  chaseMemoryTime: 2
-  timeBetweenAttacks: 1
-  walkRange: 50
-  sightRange: 90
-  attackRange: 1
-  playerInSightRange: 0
-  playerInLineOfSight: 0
-  playerInAttackRange: 0
 --- !u!54 &2055291822
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38970,6 +39670,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   interval: 1
+--- !u!114 &2055291824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055291816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a7fd985efc9744880c654f27c68dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 100
+  _Health: 0
+--- !u!114 &2055291825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055291816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  healthPercent: 0
+--- !u!64 &2055291826
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055291816}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4728807580002398413, guid: 98a461e913c368a4aba947b9be019c38, type: 3}
 --- !u!1 &2055675079
 GameObject:
   m_ObjectHideFlags: 0
@@ -40674,9 +41424,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2144783603}
   - component: {fileID: 2144783605}
-  - component: {fileID: 2144783604}
   m_Layer: 5
-  m_Name: EnenmyHealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40703,20 +41452,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2144783604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144783602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79c248eecc1b0458bf4b7b9d0eacfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 2144783605}
-  healthPercent: 0
 --- !u!114 &2144783605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40874,6 +41609,128 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ce6fca16ceaf0b49adc0e8b11741b64, type: 3}
+--- !u!1001 &3206987464034907860
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 315.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.423773
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 199.67255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477981083433552313, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821891087422034691, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+      propertyPath: m_Name
+      value: MonkieCoin
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+--- !u!1001 &8845185528361189882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 94452477652183681, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520765678780666014, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_Name
+      value: Hitbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520765678780666014, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 284
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 199.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658800692639330133, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b7c7122f20ee764ab8e2c6012e35e8c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -40893,3 +41750,5 @@ SceneRoots:
   - {fileID: 1763695686}
   - {fileID: 1685944293}
   - {fileID: 355445054}
+  - {fileID: 3206987464034907860}
+  - {fileID: 8845185528361189882}

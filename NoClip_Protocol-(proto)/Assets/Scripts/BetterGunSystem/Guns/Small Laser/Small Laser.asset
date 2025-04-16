@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec8e8c7fd27c3e45acb5a13aa7ede34, type: 3}
+  m_Name: Small Laser
+  m_EditorClassIdentifier: 
+  Type: 2
+  Name: Small Laser
+  ModelPrefab: {fileID: 7821891087422034691, guid: a202d4f058e956c4fa35d565b1530251, type: 3}
+  SpawnPoint: {x: 0, y: 0, z: 0}
+  SpawnRotation: {x: 0, y: 0, z: 0}
+  DamageConfig: {fileID: 11400000, guid: ab4ea404a7271aa41a4249a0c411bc38, type: 2}
+  ShootConfig: {fileID: 11400000, guid: 1df17b7a519408d46a23512463d4cbfd, type: 2}
+  TrailConfig: {fileID: 11400000, guid: 205da483a6c66e24d802e3eb3202e388, type: 2}

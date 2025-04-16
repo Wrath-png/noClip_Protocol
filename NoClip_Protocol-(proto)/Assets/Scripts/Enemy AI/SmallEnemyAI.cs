@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -8,25 +9,28 @@ using UnityEngine.UI;
 //Will contain the AI for the easy enemies. They will travel from waypoint to waypoint but stop and shoot at the player if they see them.
 public class SmallEnemyAI : MonoBehaviour
 {
-    [Header("Stats")]
-    public float speed = 15;
-    [SerializeField] public float maxHealth = 25;
-    private float curHealth;
-
     [Header("AI Settings")]
     public float sightRange, attackRange;
-    public float atkDamage;
+    public float speed;
     public float waitTime = 2f;
     public float timeBetweenAttacks = 1f;
-    public float chaseMemoryTime = 2f;
-    public float walkRange = 10f;
+    public bool wandering = false;
+    public float wanderRadius = 45f;
+    public float wanderTime = 5f;
+    public float damageMultiplier = 1f;
+    public float memory = 2f;
+    public bool enableAttack = true;
+    public bool enableWander = false;
+    public bool enablePatrol = true;
+    public bool enableChase = true;
 
     [Header("References")]
+    
     public Transform[] waypoints;
     public Transform head;
     public LayerMask whatIsWall, whatIsPlayer;
     public AnimationStateChanger animationStateChanger;
-    [SerializeField] EnemyHealthBar healthBar;
+    public EnemyAttack attack;
 
     public NavMeshAgent agent { get; private set; }
     public Transform player { get; private set; }
@@ -50,16 +54,18 @@ public class SmallEnemyAI : MonoBehaviour
     void Awake() 
     {
         agent = GetComponent<NavMeshAgent>();
-        healthBar = GetComponentInChildren<EnemyHealthBar>(true);
         head = transform.Find("ProtoEnemy");
         player = GameObject.Find("RagequitPlayer").transform;
+        attack = GetComponent<EnemyAttack>();
     }
     void Start()
     {
         animationStateChanger = GetComponent<AnimationStateChanger>();
-        curHealth = maxHealth;
-        healthBar.UpdateHealthBar(curHealth, maxHealth);
-        TransitionToState(new PatrolState(this));
+        if (enableWander) {
+            TransitionToState(new WanderState(this));  // Start in WanderState
+        } else {
+            TransitionToState(new PatrolState(this));  // Start in PatrolState
+        }
     }
     void Update()
     {
@@ -80,7 +86,7 @@ public class SmallEnemyAI : MonoBehaviour
             float distance = Vector3.Distance(head.position, player.position);
             if (!Physics.Raycast(head.position, direction, distance, whatIsWall)) {
                 if (Physics.Raycast(head.position, direction, distance, whatIsPlayer)) {
-                    lastSeenTime = Time.time;
+                    lastSeenTime = Time.time;   //Update last seen time
                     ChangeAnimation(idleState);     //Ends look around animation 
                     return true;
                 }
@@ -95,22 +101,46 @@ public class SmallEnemyAI : MonoBehaviour
         }
         return false;   //Player not in field of vision.
     }
-    public float TimeSinceLastSeenPlayer() {
-        return Time.time - lastSeenTime;
+    public bool RememberLocation() {
+        return Time.time - lastSeenTime <= memory;  //Returns true if less time than memory has passed
     }
     public bool InAttackRange() {
-        return Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        // First check if player is within the attack radius
+        bool inRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+    
+        if (!inRange) return false;
+
+        // Now confirm if there's a clear line of sight
+        Vector3 direction = (player.position - head.position).normalized;
+        float distance = Vector3.Distance(head.position, player.position);
+
+        // Ensure there are no walls between enemy and player
+        if (!Physics.Raycast(head.position, direction, distance, whatIsWall))
+        {
+            return true;
+        }
+
+        return false;
     }
     public Vector3 PlayerPositionFlat() {
         return new Vector3(player.position.x, 0f, player.position.z);
     }
+    public Vector3 FlatPosition(Vector3 pos) {
+        return new Vector3(pos.x, 0f, pos.z);
+    }
+    public Vector3 PlayerPosition() {
+        return new Vector3(player.position.x, player.position.y, player.position.z);
+    }
     public void FacePlayer() {
-        transform.LookAt(PlayerPositionFlat());
+        transform.LookAt(PlayerPosition());
+    }
+    public float GetDamageMultiplier() {
+        return damageMultiplier;
     }
     public void TryAttack() {
         if (!attacking) {
             attacking = true;
-            // Hook up to EnemyGun logic here
+            attack.Attack();
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }    
     }
@@ -123,8 +153,8 @@ public class SmallEnemyAI : MonoBehaviour
     }
     public bool AtWaypoint() {
         Transform wp = waypoints[currentWaypointIndex];
-        Vector3 flatPosition = new Vector3(transform.position.x, 0f, transform.position.z);
-        Vector3 flatWaypoint = new Vector3(wp.position.x, 0f, wp.position.z);
+        Vector3 flatPosition = FlatPosition(transform.position);
+        Vector3 flatWaypoint = FlatPosition(wp.position);
         
         if (!hasWaited && Vector3.Distance(flatPosition, flatWaypoint) < 0.01f) {
             //Debug.Log("Going to Wait");
@@ -136,7 +166,7 @@ public class SmallEnemyAI : MonoBehaviour
         }
         return false;
     }
-    public void WaitAtWaypoint(){
+    public void WaitAtPoint(){
         if(waiting) {
             waitCounter += Time.deltaTime;
             if(waitCounter < waitTime) {
@@ -147,7 +177,9 @@ public class SmallEnemyAI : MonoBehaviour
                 ChangeAnimation(idleState);
                 waitCounter = 0f;
 
-                SetNextWaypoint();
+                if (enablePatrol && !(currentState is WanderState)) {
+                    SetNextWaypoint();
+                }
             }
         }
     }
@@ -163,62 +195,65 @@ public class SmallEnemyAI : MonoBehaviour
         yield return new WaitForSeconds(3f); // Adjust the delay as needed
         hasWaited = false;
     }
-    private void Wander() {
+    public void Wander() {
         if(!wanderPointSet) SearchWanderPoint();
 
         //Start moving
-        if (wanderPointSet) {
+        if (wanderPointSet && !wandering) {
+            wandering = true;
             agent.SetDestination(wanderPos);
         }
-        Vector3 distanceToMove = transform.position - wanderPos;
 
-        //WanderPosition reached
-        if(distanceToMove.magnitude < 1f) {
+        // float distanceToMove = Vector3.Distance(FlatPosition(transform.position), FlatPosition(wanderPos));
+
+        // //WanderPosition reached
+        // if(distanceToMove < 1f) {
+        //     Debug.Log("Reached Wander Location");
+        // }
+    }
+    public bool AtWanderPoint() {
+        Vector3 flatPosition = FlatPosition(transform.position);
+        Vector3 flatWander = FlatPosition(wanderPos);
+        
+        if (!hasWaited && Vector3.Distance(flatPosition, flatWander) < 1f) {
+            //Debug.Log("Going to Wait");
+            ChangeAnimation(lookAroundState);
             wanderPointSet = false;
+            wandering = false;
+            waiting = true;
+            hasWaited = true;
+            StartCoroutine(ResetWaitedFlag());
+            return true;
         }
+        return false;
     }
     private void SearchWanderPoint() {
-        float randomZ = Random.Range(-walkRange, walkRange);
-        float randomX = Random.Range(-walkRange, walkRange);
+        float randomZ = UnityEngine.Random.Range(-wanderRadius, wanderRadius);
+        float randomX = UnityEngine.Random.Range(-wanderRadius, wanderRadius);
 
-        wanderPos = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        if (Physics.Raycast(transform.position, (wanderPos - transform.position).normalized, walkRange, whatIsWall)) 
+        wanderPos = new Vector3(transform.position.x + randomX, 0f, transform.position.z + randomZ);
+        if (Physics.Raycast(transform.position, (wanderPos - transform.position).normalized, wanderRadius, whatIsWall)) 
         {
-            //Debug.Log("Wall detected! Not moving this frame.");
+            Debug.Log("Wall detected! Not moving this frame.");
             return; // Exit without changing position
         }
     
         // No wall detected, proceed with movement
-        //Debug.Log("Safe path. Moving to wander position.");
-        Debug.DrawRay(transform.position, (wanderPos - transform.position).normalized * walkRange, Color.green, 1f);
+        Debug.Log("Safe path. Moving to wander position.");
+        Debug.DrawRay(transform.position, (wanderPos - transform.position).normalized * wanderRadius, Color.green, 1f);
         wanderPointSet = true;
-        transform.LookAt(wanderPos);
     }
-    
-    public void TakeDamage(int damage) {
-        curHealth -= damage;
-        healthBar.UpdateHealthBar(curHealth, maxHealth);
-        Debug.Log($"Enemy {gameObject.name} took {damage} damage. Current Health: {curHealth}/{maxHealth}");
 
-        if (curHealth <= 0) {
-
-            //Add code to stop all movement and animations
-
-            Invoke("DestroyEnemy", 0.5f);
-        }
-    }
     private void DestroyEnemy() {
-
-        //Change code to instead apply gravity to enemy so it falls to the ground.
-
-        Debug.Log($"{gameObject.name} Defeated!");
-        Destroy(gameObject);
+    Debug.Log($"{gameObject.name} Defeated!");
+    Destroy(gameObject);
     }
-
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, wanderRadius);
     }
 }

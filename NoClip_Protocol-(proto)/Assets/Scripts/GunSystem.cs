@@ -91,18 +91,24 @@ public class GunSystem : MonoBehaviour
                 Debug.DrawRay(LeftMuzzle.position, direction * range, Color.red, 2f);
                 
 
-                if (hit.collider.CompareTag("Enemy")) {
-                    SmallEnemyAI enemyAI = hit.collider.GetComponent<SmallEnemyAI>();
-                    if (enemyAI != null) {
-                        enemyAI.TakeDamage(damage);
-                    }
+                //Will deal damage to anying with Idamageable attached to it
+                IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+                if (damageable != null) {
+                    damageable.TakeDamage(damage);
                 }
-                if (hit.collider.CompareTag("Practice Dummy")) { 
-                    PracticeDummy dummy = hit.collider.GetComponent<PracticeDummy>();
-                    if (dummy != null) {
-                        dummy.TakeDamage(damage);
-                    }
-                }
+
+                // if (hit.collider.CompareTag("Enemy")) {
+                //     SmallEnemyAI enemyAI = hit.collider.GetComponent<SmallEnemyAI>();
+                //     if (enemyAI != null) {
+                //         enemyAI.TakeDamage(damage);
+                //     }
+                // }
+                // if (hit.collider.CompareTag("Practice Dummy")) { 
+                //     PracticeDummy dummy = hit.collider.GetComponent<PracticeDummy>();
+                //     if (dummy != null) {
+                //         dummy.TakeDamage(damage);
+                //     }
+                // }
                 // if (hit.normal != Vector3.zero) { // Ensure the normal is valid
                 //     //Instantiate(rockParticle, hit.point, Quaternion.LookRotation(hit.normal));
                 //     Instantiate(bulletHoleGraphic, hit.point, Quaternion.LookRotation(hit.normal));
@@ -139,19 +145,24 @@ public class GunSystem : MonoBehaviour
                 
                 Debug.DrawRay(RightMuzzle.position, direction * range, Color.red, 2f);
                 
+                //Will deal damage to anying with Idamageable attached to it
+                IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+                if (damageable != null) {
+                    damageable.TakeDamage(damage);
+                }
 
-                if (hit.collider.CompareTag("Enemy")) {
-                    SmallEnemyAI enemyAI = hit.collider.GetComponent<SmallEnemyAI>();
-                    if (enemyAI != null) {
-                        enemyAI.TakeDamage(damage);
-                    }
-                }
-                if (hit.collider.CompareTag("Practice Dummy")) { 
-                    PracticeDummy dummy = hit.collider.GetComponent<PracticeDummy>();
-                    if (dummy != null) {
-                        dummy.TakeDamage(damage);
-                    }
-                }
+                // if (hit.collider.CompareTag("Enemy")) {
+                //     SmallEnemyAI enemyAI = hit.collider.GetComponent<SmallEnemyAI>();
+                //     if (enemyAI != null) {
+                //         enemyAI.TakeDamage(damage);
+                //     }
+                // }
+                // if (hit.collider.CompareTag("Practice Dummy")) { 
+                //     PracticeDummy dummy = hit.collider.GetComponent<PracticeDummy>();
+                //     if (dummy != null) {
+                //         dummy.TakeDamage(damage);
+                //     }
+                // }
                 // if (hit.normal != Vector3.zero) { // Ensure the normal is valid
                 //     //Instantiate(rockParticle, hit.point, Quaternion.LookRotation(hit.normal));
                 //     Instantiate(bulletHoleGraphic, hit.point, Quaternion.LookRotation(hit.normal));
