@@ -15,7 +15,7 @@ public class WanderState : EnemyState
 
     public override void Update()
     {
-        if (enemy.CanSeePlayer()) {
+        if (enemy.enableChase && enemy.CanSeePlayer()) {
             enemy.TransitionToState(new ChaseState(enemy));
             return;
         }

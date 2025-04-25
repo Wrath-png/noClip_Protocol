@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -56,6 +57,8 @@ public class ElevatorScript : MonoBehaviour
         // Fade to black
         yield return StartCoroutine(FadeToBlack());
 
+        //Set level
+        LevelManager.Instance.AdvanceLevel();
         // Restart the game
         SceneManager.LoadScene(1);
     }

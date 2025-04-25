@@ -58,6 +58,41 @@ public class SmallEnemyAI : MonoBehaviour
         player = GameObject.Find("RagequitPlayer").transform;
         attack = GetComponent<EnemyAttack>();
     }
+
+    public void SetPatrolPath(Transform[] newPath) {
+        waypoints = newPath;
+        currentWaypointIndex = 0;
+    }
+    public void SetStats(
+        float speed,
+        float damageMultiplier,
+        float sightRange,
+        float attackRange,
+        float wanderRadius,
+        float memory
+        ) {
+
+        this.sightRange = sightRange;
+        this.attackRange = attackRange;
+        this.wanderRadius = wanderRadius;
+        this.speed = speed;
+        this.damageMultiplier = damageMultiplier;
+        this.memory = memory;
+        agent.speed = speed;
+    }
+    public void SetBehaviors(
+        bool attackAllowed, 
+        bool wanderAllowed, 
+        bool patrolAllowed, 
+        bool chaseAllowed
+        ) {
+        
+        enableAttack = attackAllowed;
+        enableWander = wanderAllowed;
+        enablePatrol = patrolAllowed;
+        enableChase = chaseAllowed;
+    }
+
     void Start()
     {
         animationStateChanger = GetComponent<AnimationStateChanger>();

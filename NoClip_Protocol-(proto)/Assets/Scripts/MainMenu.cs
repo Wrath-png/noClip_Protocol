@@ -60,6 +60,7 @@ public class MainMenu : MonoBehaviour
     //Loads up the game
     public void Play() {
         bgm.SetMusic("Kaixo - Mystic");
+        LevelManager.Instance.ResetLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         mainMenuUI.SetActive(false);
     }

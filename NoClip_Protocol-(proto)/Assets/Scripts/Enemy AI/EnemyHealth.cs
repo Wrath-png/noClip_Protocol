@@ -23,6 +23,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
         }
     }
+
+    public void SetMaxHealth(int newMaxHealth) {
+        MaxHealth = newMaxHealth;
+        CurrentHealth = newMaxHealth;
+
+        if (healthBar != null)
+            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+    }
+
     public void TakeDamage(int Damage)
     {
         int damageTaken = Mathf.Clamp(Damage, 0, CurrentHealth);

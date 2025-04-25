@@ -16,7 +16,7 @@ public class AttackState : EnemyState
     {
         if (!enemy.CanSeePlayer())
         {
-            if (enemy.RememberLocation())
+            if (enemy.enableChase && enemy.RememberLocation())
             {
                 enemy.TransitionToState(new ChaseState(enemy));
             }
@@ -27,7 +27,7 @@ public class AttackState : EnemyState
             return;
         }
         
-        if (!enemy.InAttackRange())
+        if (enemy.enableChase && !enemy.InAttackRange())
         {
             enemy.TransitionToState(new ChaseState(enemy));
             return;
