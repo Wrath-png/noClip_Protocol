@@ -25,13 +25,9 @@ public class NoClipEffect : MonoBehaviour
 
     [Header("Intangibility Effect")]
     public CharacterController controller;
+    private Vector3 noClipStartPosition;
+    public bool isInNullZone = false;
     private GameObject[] walls;
-
-
-    void Start()
-    {
-
-    }
 
     void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -68,15 +64,20 @@ public class NoClipEffect : MonoBehaviour
         walls = GameObject.FindGameObjectsWithTag("NoClipWall");
         foreach (GameObject wall in walls)
         {
+            BoxCollider Col = wall.GetComponent<BoxCollider>();
+            if (Col != null) {
+                Col.isTrigger = false;
+            }
+
             Renderer renderer = wall.GetComponent<Renderer>();
-            if (renderer != null)
-            {
+            if (renderer != null) {
                 originalMaterials[renderer] = renderer.material;
             }
         }
     }
 
     public void Activate() {
+        noClipStartPosition = transform.position;
         NoClipToggle(true);
         controller.enabled = false;
         foreach (var pair in originalMaterials)
@@ -85,6 +86,10 @@ public class NoClipEffect : MonoBehaviour
         }
     }
     public void Deactivate() {
+        if (isInNullZone) {
+            Debug.Log("Exited NoClip in restricted zone");
+            StartCoroutine(RevertPosition(noClipStartPosition));
+        }
         NoClipToggle(false);
         controller.enabled = true;
         foreach (var pair in originalMaterials)
@@ -106,6 +111,12 @@ public class NoClipEffect : MonoBehaviour
         }
     }
 
+    private IEnumerator RevertPosition(Vector3 noClipStartPosition) {
+        Debug.Log("Reverting Position");
+        //transform.position = Vector3.MoveTowards(transform.position, noClipStartPosition, 1 * Time.deltaTime);
+        transform.position = noClipStartPosition;
+        yield return null;
+    }
     private IEnumerator FadeWallsToTransparent(Renderer renderer, Material originalMaterial) {
         // Create a new transparent material for this wall
         Material fadeMat = new Material(transparentMaterial);
