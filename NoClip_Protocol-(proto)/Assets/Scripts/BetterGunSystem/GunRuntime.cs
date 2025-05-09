@@ -27,7 +27,10 @@ public class GunRuntime : MonoBehaviour
         if (Time.time > config.ShootConfig.FireRate + lastShootTime) {
             lastShootTime = Time.time;
 
-            if (shootSystem != null) shootSystem.Play();
+            if (shootSystem != null)
+            {
+                shootSystem.Play();
+            }
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Vector3 shootDirection = firePoint.forward; 
@@ -37,7 +40,9 @@ public class GunRuntime : MonoBehaviour
                 Vector3 targetPoint = player.transform.position;
                 Collider playerCollider = player.GetComponent<Collider>();
                 if (playerCollider != null)
+                {
                     targetPoint = playerCollider.bounds.center;
+                }
 
                 shootDirection = (targetPoint - firePoint.position).normalized;
             }

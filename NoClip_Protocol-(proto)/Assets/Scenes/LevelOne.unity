@@ -27879,9 +27879,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73001b2a98aadc34ba9b6db019ef9b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeToBlack: {fileID: 0}
-  TextObj: {fileID: 0}
-  deathText: {fileID: 0}
+  fadeToBlack: {fileID: 668783762}
+  TextObj: {fileID: 2045442006}
+  deathText: {fileID: 2045442009}
 --- !u!82 &1193962561
 AudioSource:
   m_ObjectHideFlags: 0
@@ -46555,8 +46555,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8719697b1baa7ac4a90d368d3bad10be, type: 2}
   - {fileID: 11400000, guid: 56acf0b00fe9d834993e727d2e1e09d8, type: 2}
   spawnPoints:
-  - {fileID: 0}
-  playerUpgradeTracker: {fileID: 0}
+  - {fileID: 443890349}
+  - {fileID: 1909941586}
+  - {fileID: 1024173054}
+  - {fileID: 171899384}
+  - {fileID: 1859258667}
+  - {fileID: 496640333}
+  - {fileID: 1682598149}
+  - {fileID: 2133030243}
+  playerUpgradeTracker: {fileID: 1193962555}
 --- !u!114 &2018084873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46569,8 +46576,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32633993b85c8af46b5a346a0b3398bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTextObj: {fileID: 0}
-  levelCountText: {fileID: 0}
+  levelTextObj: {fileID: 2045442006}
+  levelCountText: {fileID: 2045442009}
   currentLevelDebug: 1
 --- !u!114 &2018084874
 MonoBehaviour:
@@ -46584,10 +46591,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58da7da116c09084ab94fe39ed8e568b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpawn: {fileID: 0}
+  playerSpawn: {fileID: 2036699411}
   enemyPrefab: {fileID: 3835335614319816210, guid: f7e53df6c9050dc40bf57755dc27dc31, type: 3}
   EnemiesToSpawn: 17
-  patrolRoutes: []
+  patrolRoutes:
+  - {fileID: 331837259}
+  - {fileID: 614400584}
+  - {fileID: 1641405747}
+  - {fileID: 1564849224}
+  - {fileID: 1306478105}
+  - {fileID: 1060066308}
+  - {fileID: 1520223748}
+  - {fileID: 46291222}
+  - {fileID: 478007290}
+  - {fileID: 338575117}
+  - {fileID: 495497672}
+  - {fileID: 642190552}
+  - {fileID: 592798170}
+  - {fileID: 1723720281}
+  - {fileID: 1557984518}
+  - {fileID: 1021787659}
   wanderPoints: []
   baseSpeed: 15
   baseHealth: 100

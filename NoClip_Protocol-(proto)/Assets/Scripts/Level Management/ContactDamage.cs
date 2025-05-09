@@ -12,7 +12,9 @@ public class ContactDamage : MonoBehaviour
         if (other.CompareTag("Player")) {
             var player = other.GetComponent<PlayerActions>();
             if (player != null)
+            {
                 damageRoutine = StartCoroutine(DamageOverTime(player));
+            }
         }
     }
 

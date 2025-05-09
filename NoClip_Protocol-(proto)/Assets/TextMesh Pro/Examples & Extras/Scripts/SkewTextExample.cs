@@ -77,10 +77,14 @@ namespace TMPro.Examples
                 int characterCount = textInfo.characterCount;
 
 
-                if (characterCount == 0) continue;
+                if (characterCount == 0)
+                {
+                    continue;
+                }
 
                 //vertices = textInfo.meshInfo[0].vertices;
                 //int lastVertexIndex = textInfo.characterInfo[characterCount - 1].vertexIndex;
+
 
                 float boundsMinX = m_TextComponent.bounds.min.x;  //textInfo.meshInfo[0].mesh.bounds.min.x;
                 float boundsMaxX = m_TextComponent.bounds.max.x;  //textInfo.meshInfo[0].mesh.bounds.max.x;
@@ -90,7 +94,10 @@ namespace TMPro.Examples
                 for (int i = 0; i < characterCount; i++)
                 {
                     if (!textInfo.characterInfo[i].isVisible)
+                    {
                         continue;
+                    }
+
 
                     int vertexIndex = textInfo.characterInfo[i].vertexIndex;
 

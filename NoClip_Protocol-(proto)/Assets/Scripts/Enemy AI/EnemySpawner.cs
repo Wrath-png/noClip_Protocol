@@ -77,7 +77,10 @@ public class EnemySpawner : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex != 2) return;  //Skip if not in levelOne
+        if (scene.buildIndex != 2)
+        {
+            return;  //Skip if not in levelOne
+        }
 
         StopAllCoroutines();
         // Re-find references here after scene reload
@@ -189,7 +192,10 @@ public class EnemySpawner : MonoBehaviour
         if (ai != null)
         {
             if (hasRoute)
+            {
                 ai.SetPatrolPath(path);
+            }
+
             ai.SetStats(speed, damage, sightRange, attackRange, wanderRadius, memory);
             ai.SetBehaviors(attackAllowed, wanderAllowed, patrolAllowed, chaseAllowed);
         }

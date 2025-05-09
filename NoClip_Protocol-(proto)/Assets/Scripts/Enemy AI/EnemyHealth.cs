@@ -33,7 +33,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         CurrentHealth = newMaxHealth;
 
         if (healthBar != null)
+        {
             healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+        }
     }
 
     public void TakeDamage(int Damage)
@@ -46,7 +48,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (damageTaken != 0) {
             OnTakeDamage?.Invoke(damageTaken);
             if (healthBar != null)
+            {
                 healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            }
         }
 
         if (CurrentHealth == 0 && damageTaken != 0) {
@@ -62,7 +66,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         // Disable NavMeshAgent
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        if (agent != null) agent.enabled = false;
+        if (agent != null)
+        {
+            agent.enabled = false;
+        }
 
         // Enable Rigidbody physics
         Rigidbody rb = GetComponent<Rigidbody>();
@@ -74,7 +81,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         // Disable AI script
         SmallEnemyAI ai = GetComponent<SmallEnemyAI>();
-        if (ai != null) ai.enabled = false;
+        if (ai != null)
+        {
+            ai.enabled = false;
+        }
 
         // Disable the capsule collider
         CapsuleCollider capsule = GetComponent<CapsuleCollider>();

@@ -61,7 +61,11 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (scene.buildIndex == 1) return; // Skip if it's the main menu
+        if (scene.buildIndex == 1)
+        {
+            return; // Skip if it's the main menu
+        }
+
         StopAllCoroutines();
         levelCountText = null;
         levelTextGroup = null;
@@ -70,15 +74,19 @@ public class LevelManager : MonoBehaviour
     IEnumerator DelayedInit() {
         // Wait until the object exists
         while ((levelTextObj = GameObject.FindGameObjectWithTag("LevelCount")) == null)
+        {
             yield return null; // Try again next frame
+        }
 
         //GameObject levelTextObj = GameObject.Find("Level Count");
-        
+
         levelCountText = levelTextObj.GetComponent<TextMeshProUGUI>();
         levelTextGroup = levelCountText.GetComponent<CanvasGroup>();
         if (levelTextGroup == null)
+        {
             levelTextGroup = levelCountText.gameObject.AddComponent<CanvasGroup>();
-        
+        }
+
         originalScale = levelCountText.transform.localScale;
             
         ShowLevelText();
@@ -87,7 +95,10 @@ public class LevelManager : MonoBehaviour
     }
 
     void ShowLevelText() {
-        if (levelCountText == null) return;
+        if (levelCountText == null)
+        {
+            return;
+        }
 
         levelCountText.text = $"Level {CurrentLevel}";
         levelTextGroup.alpha = 1f;
@@ -105,7 +116,9 @@ public class LevelManager : MonoBehaviour
         while (time < duration)
         {
             if (levelTextGroup == null || levelCountText == null)
+            {
                 yield break;    //Should orevent exception when destroyed on reset.
+            }
 
             float t = time / duration;
             levelTextGroup.alpha = Mathf.Lerp(1f, 0f, t);

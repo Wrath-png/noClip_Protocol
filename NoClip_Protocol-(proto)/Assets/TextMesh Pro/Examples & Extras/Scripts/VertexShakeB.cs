@@ -42,7 +42,10 @@ namespace TMPro.Examples
         void ON_TEXT_CHANGED(Object obj)
         {
             if (obj = m_TextComponent)
+            {
                 hasTextChanged = true;
+            }
+
         }
 
         /// <summary>
@@ -69,7 +72,10 @@ namespace TMPro.Examples
                 if (hasTextChanged)
                 {
                     if (copyOfVertices.Length < textInfo.meshInfo.Length)
+                    {
                         copyOfVertices = new Vector3[textInfo.meshInfo.Length][];
+                    }
+
 
                     for (int i = 0; i < textInfo.meshInfo.Length; i++)
                     {
@@ -107,9 +113,12 @@ namespace TMPro.Examples
                     {
                         // Skip characters that are not visible and thus have no geometry to manipulate.
                         if (!textInfo.characterInfo[j].isVisible)
+                        {
                             continue;
+                        }
 
                         // Get the index of the material used by the current character.
+
                         int materialIndex = textInfo.characterInfo[j].materialReferenceIndex;
 
                         // Get the index of the first vertex used by this text element.

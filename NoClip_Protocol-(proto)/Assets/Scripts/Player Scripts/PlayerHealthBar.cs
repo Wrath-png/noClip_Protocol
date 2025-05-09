@@ -18,16 +18,25 @@ public class PlayerHealthBar : MonoBehaviour
         healthBar.value = healthPercent;
         
         if (healthPercent > 0.8)
+        {
             fillImage.color = Color.green;
+        }
         else if (healthPercent > 0.6)
+        {
             fillImage.color = Color.Lerp(Color.yellow, Color.green, (healthPercent - 0.6f) * 2);
+        }
         else if (healthPercent > 0.4)
+        {
             fillImage.color = Color.yellow;
+        }
         else if (healthPercent > 0.2)
+        {
             fillImage.color = Color.Lerp(Color.red, Color.yellow, (healthPercent - 0.2f) * 2);
+        }
         else
+        {
             fillImage.color = Color.red;
-        
+        }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

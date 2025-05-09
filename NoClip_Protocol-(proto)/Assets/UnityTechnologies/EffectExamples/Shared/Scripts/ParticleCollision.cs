@@ -28,7 +28,11 @@ public class ParticleCollision : MonoBehaviour
 
             var fire = col.GetComponent<ExtinguishableFire>();
             if (fire != null)
+            {
+
                 fire.Extinguish();
+            }
+
         }
     }
 }

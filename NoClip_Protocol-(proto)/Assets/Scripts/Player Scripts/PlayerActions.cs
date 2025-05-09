@@ -88,8 +88,15 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MainMenu.IsPaused) return;  //Check if paused
-        if (isDead) return;
+        if (MainMenu.IsPaused)
+        {
+            return;  //Check if paused
+        }
+
+        if (isDead)
+        {
+            return;
+        }
         //NoClip Behaviors
         if (Input.GetKeyDown(KeyCode.Tab)) {
             Debug.Log("Tab pressed");
@@ -250,31 +257,41 @@ public class PlayerActions : MonoBehaviour
     {
         GunSystem gunSystem = FindAnyObjectByType<GunSystem>();
         if (gunSystem != null)
-            gunSystem.UpgradeSpread(upgrade);    
+        {
+            gunSystem.UpgradeSpread(upgrade);
+        }
     }
     private void UpgradeRange(UpgradeData upgrade)
     {
         GunSystem gunSystem = FindAnyObjectByType<GunSystem>();
         if (gunSystem != null)
-            gunSystem.UpgradeRange(upgrade);    
+        {
+            gunSystem.UpgradeRange(upgrade);
+        }
     }
     private void UpgradePellet(UpgradeData upgrade)
     {
         GunSystem gunSystem = FindAnyObjectByType<GunSystem>();
         if (gunSystem != null)
-            gunSystem.UpgradePellet(upgrade);    
+        {
+            gunSystem.UpgradePellet(upgrade);
+        }
     }
      private void UpgradeDamage(UpgradeData upgrade)
     {
         GunSystem gunSystem = FindAnyObjectByType<GunSystem>();
         if (gunSystem != null)
-            gunSystem.UpgradeDamage(upgrade);    
+        {
+            gunSystem.UpgradeDamage(upgrade);
+        }
     }
     private void UpgradeAmmo(UpgradeData upgrade)
     {
         GunSystem gunSystem = FindAnyObjectByType<GunSystem>();
         if (gunSystem != null)
+        {
             gunSystem.UpgradeAmmo(upgrade);
+        }
     }
 
     //NoClip Upgrades
@@ -293,7 +310,9 @@ public class PlayerActions : MonoBehaviour
     {
         NoClipSword Sword = FindAnyObjectByType<NoClipSword>();
         if (Sword != null)
+        {
             Sword.UpgradeDamage(upgrade);
+        }
     }
 
     //Stat Upgrades

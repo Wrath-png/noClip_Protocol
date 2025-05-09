@@ -23,7 +23,9 @@ public class PlayerUpgradeTracker : MonoBehaviour
         foreach (var entry in upgrades)
         {
             if (entry.upgrade != null)
+            {
                 collectedUpgrades[entry.upgrade.upgradeID] = entry.tier;
+            }
         }
     }
 

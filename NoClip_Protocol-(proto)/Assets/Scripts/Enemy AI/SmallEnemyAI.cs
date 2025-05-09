@@ -138,7 +138,10 @@ public class SmallEnemyAI : MonoBehaviour
         // First check if player is within the attack radius
         bool inRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
     
-        if (!inRange) return false;
+        if (!inRange)
+        {
+            return false;
+        }
 
         // Now confirm if there's a clear line of sight
         Vector3 direction = (player.position - head.position).normalized;
@@ -226,7 +229,10 @@ public class SmallEnemyAI : MonoBehaviour
         hasWaited = false;
     }
     public void Wander() {
-        if(!wanderPointSet) SearchWanderPoint();
+        if(!wanderPointSet)
+        {
+            SearchWanderPoint();
+        }
 
         //Start moving
         if (wanderPointSet && !wandering) {

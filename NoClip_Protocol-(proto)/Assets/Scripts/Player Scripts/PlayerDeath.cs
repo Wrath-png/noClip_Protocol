@@ -48,7 +48,9 @@ public class PlayerDeath : MonoBehaviour
 
         MainMenu menu = FindAnyObjectByType<MainMenu>();
         if (menu != null)
+        {
             menu.ShowDeathMenu();
+        }
     }
 
     private IEnumerator FadeToBlack()
@@ -64,7 +66,10 @@ public class PlayerDeath : MonoBehaviour
     }
 
     void ShowDeathText() {
-        if (deathText == null) return;
+        if (deathText == null)
+        {
+            return;
+        }
 
         deathText.text = $"You did Not Survive";
         deathTextGroup.alpha = 0f;
@@ -96,13 +101,17 @@ public class PlayerDeath : MonoBehaviour
     IEnumerator FindDeathText() {
         // Wait until the object exists
         while ((TextObj = GameObject.FindGameObjectWithTag("LevelCount")) == null)
+        {
             yield return null; // Try again next frame
+        }
 
         //GameObject levelTextObj = GameObject.Find("Level Count");
-        
+
         deathText = TextObj.GetComponent<TextMeshProUGUI>();
         deathTextGroup = deathText.GetComponent<CanvasGroup>();
         if (deathTextGroup == null)
-            deathTextGroup = deathText.gameObject.AddComponent<CanvasGroup>();    
+        {
+            deathTextGroup = deathText.gameObject.AddComponent<CanvasGroup>();
+        }
     }
 }

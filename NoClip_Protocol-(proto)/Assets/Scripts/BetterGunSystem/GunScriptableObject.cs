@@ -17,12 +17,6 @@ public class GunScriptableObject : ScriptableObject
     public ShootConfigurationScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;
 
-    private MonoBehaviour ActiveMonoBehaviour;
-    private GameObject Model;
-    private float LastShootTime;
-    private ParticleSystem ShootSystem;
-    private ObjectPool<TrailRenderer> TrailPool;
-
     public GunRuntime Spawn(Transform parent, MonoBehaviour owner) 
     {
         GameObject modelInstance = Instantiate(ModelPrefab, parent);

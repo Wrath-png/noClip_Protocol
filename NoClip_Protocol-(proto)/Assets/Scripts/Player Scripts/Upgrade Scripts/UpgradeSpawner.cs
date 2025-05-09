@@ -23,10 +23,16 @@ public class UpgradesScript : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex != 2) return;  //Skip if not in levelOne
-        if (playerUpgradeTracker == null) 
+        if (scene.buildIndex != 2)
+        {
+            return;  //Skip if not in levelOne
+        }
+
+        if (playerUpgradeTracker == null)
+        {
             playerUpgradeTracker = FindAnyObjectByType<PlayerUpgradeTracker>();
-    
+        }
+
         spawnPoints = null;
         spawnPoints = GameObject.FindGameObjectsWithTag("UpSpawn").Select(obj => obj.transform).ToArray();
         SpawnUpgrades();

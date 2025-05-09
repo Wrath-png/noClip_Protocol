@@ -294,7 +294,7 @@ MonoBehaviour:
   attack: {fileID: 0}
   smallEnemySound: {fileID: 4195738274044848049}
   drone: {fileID: 8300000, guid: adeff0c9923d01f469a256a61f2e443a, type: 3}
-  explode: {fileID: 0}
+  explode: {fileID: 8300000, guid: 7dc20b7e9daec4b4faa74be96b324916, type: 3}
   waiting: 0
   hasWaited: 0
   idleState: idle

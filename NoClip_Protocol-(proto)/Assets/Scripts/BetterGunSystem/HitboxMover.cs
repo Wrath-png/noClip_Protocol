@@ -35,9 +35,12 @@ public class HitboxMover : MonoBehaviour
 
     void Update()
     {
-        if (hasCollided) return;
+        if (hasCollided)
+        {
+            return;
+        }
 
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += speed * Time.deltaTime * direction;
 
         timer += Time.deltaTime;
         if (timer > lifetime)
@@ -49,12 +52,17 @@ public class HitboxMover : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (hasCollided) return;
+        if (hasCollided)
+        {
+            return;
+        }
 
         // Avoid self-hit or friendly fire
         if (other.gameObject == owner || other.transform.IsChildOf(owner.transform))
+        {
             return;
-        
+        }
+
         laserSource.PlayOneShot(laserHit);
         hasCollided = true;
         int finalDamage = Mathf.RoundToInt(damageMult * damageConfig.GetDamage(1f));

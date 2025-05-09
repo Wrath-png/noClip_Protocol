@@ -73,6 +73,8 @@ public class ElevatorScript : MonoBehaviour
 
        // Once lifted, wait a moment before changing scene
         yield return new WaitForSeconds(1f);
+        PlayerSpawnPoint spawnPoint = FindAnyObjectByType<PlayerSpawnPoint>();
+        player.transform.SetPositionAndRotation(new Vector3(spawnPoint.transform.position.x, 10f, spawnPoint.transform.position.z), Quaternion.Euler(0f, 180f, 0f));
 
         //Advance level and reload scene
         playerActions.enabled = true;

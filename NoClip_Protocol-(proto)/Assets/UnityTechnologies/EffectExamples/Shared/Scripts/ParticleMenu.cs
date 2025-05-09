@@ -41,10 +41,12 @@ public class ParticleMenu : MonoBehaviour {
 
 		// check if there is a currentGO, if there is (if its not null), then destroy it to make space for the new one..
 		if(currentGO != null)
-			Destroy (currentGO);
+        {
+            Destroy (currentGO);
+        }
 
-		// ..spawn the relevant game object based on the array of potential game objects, according to the current index (position in the array)
-		currentGO = Instantiate (particleSystems[currentIndex].particleSystemGO, spawnLocation.position + particleSystems[currentIndex].particlePosition, Quaternion.Euler(particleSystems[currentIndex].particleRotation)) as GameObject;
+        // ..spawn the relevant game object based on the array of potential game objects, according to the current index (position in the array)
+        currentGO = Instantiate (particleSystems[currentIndex].particleSystemGO, spawnLocation.position + particleSystems[currentIndex].particlePosition, Quaternion.Euler(particleSystems[currentIndex].particleRotation)) as GameObject;
 
 		// only activate the gun GameObject if the current effect is a weapon effect
 		gunGameObject.SetActive (particleSystems[currentIndex].isWeaponEffect);

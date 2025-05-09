@@ -34,7 +34,9 @@ public class MainMenu : MonoBehaviour
     void Update() 
     {
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             TogglePause();
+        }
     }
     public void TogglePause() {
         isPaused = !isPaused;
@@ -103,7 +105,9 @@ public class MainMenu : MonoBehaviour
     public void BackFromOptions() {
         optionsMenuUI.SetActive(false);
         if (prevMenu != null)
+        {
             prevMenu.SetActive(true);
+        }
     }
 
     void OnEnable() {

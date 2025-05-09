@@ -24,7 +24,10 @@ namespace TMPro.Examples
         void Awake()
         {
             if (!enabled)
+            {
                 return;
+            }
+
 
             m_camera = Camera.main;
 

@@ -40,10 +40,19 @@ public class GunSystem : MonoBehaviour
     public TextMeshProUGUI textRight;
 
     private void MyInput() {
-        if(allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);    //Will charge for more powerful shot
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);               //Shoots one shell
+        if(allowButtonHold)
+        {
+            shooting = Input.GetKey(KeyCode.Mouse0);    //Will charge for more powerful shot
+        }
+        else
+        {
+            shooting = Input.GetKeyDown(KeyCode.Mouse0);               //Shoots one shell
+        }
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading) Reload();
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading)
+        {
+            Reload();
+        }
 
         //Shoot
         if (readyToShoot && shooting && !reloading && ((bulletsLeft > 0) || (bulletsRight > 0))) {
@@ -95,8 +104,10 @@ public class GunSystem : MonoBehaviour
                 
                 //Will deal damage to anying with Idamageable attached to it
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
-                if (damageable != null) 
+                if (damageable != null)
+                {
                     damageable.TakeDamage(damage);
+                }
             }
             else {
                 //Will show Trails even if nothing is hit.
@@ -127,8 +138,10 @@ public class GunSystem : MonoBehaviour
                 
                 //Will deal damage to anying with Idamageable attached to it
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
-                if (damageable != null) 
+                if (damageable != null)
+                {
                     damageable.TakeDamage(damage);
+                }
             }
             else {
                 //Will show Trails even if nothing is hit.
@@ -160,7 +173,10 @@ public class GunSystem : MonoBehaviour
         float distance = Vector3.Distance(Trail.transform.position, HitPoint);
         float remainingDistance = distance;
 
-        if (distance == 0) yield break;
+        if (distance == 0)
+        {
+            yield break;
+        }
 
         while (remainingDistance > 0) {
             Trail.transform.position = Vector3.Lerp(startPosition, HitPoint, 1 - (remainingDistance / distance));
@@ -204,7 +220,11 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MainMenu.IsPaused) return;  //Check if paused
+        if (MainMenu.IsPaused)
+        {
+            return;  //Check if paused
+        }
+
         MyInput();
         //Set Text
         textLeft.SetText(bulletsLeft + " / " + magSize);
