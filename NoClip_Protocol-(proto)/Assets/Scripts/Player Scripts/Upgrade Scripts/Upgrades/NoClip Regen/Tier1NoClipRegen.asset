@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: noclipregen
   tier: 1
-  prefab: {fileID: 1156680540414199998, guid: c9250b6a9581ab146850127ee38c6631, type: 3}
+  prefab: {fileID: 360628448913327042, guid: 90471349d4251b144b1ddc90473f8f02, type: 3}

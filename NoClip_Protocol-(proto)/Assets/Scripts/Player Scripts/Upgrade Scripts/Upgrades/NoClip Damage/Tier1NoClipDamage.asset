@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: noclipdamage
   tier: 1
-  prefab: {fileID: 2845826720348335155, guid: 4e73bff8c94826e47baef7035fe5fdb7, type: 3}
+  prefab: {fileID: 2251404351484215581, guid: c9f801610d196ee4fbaad7b0aac20308, type: 3}

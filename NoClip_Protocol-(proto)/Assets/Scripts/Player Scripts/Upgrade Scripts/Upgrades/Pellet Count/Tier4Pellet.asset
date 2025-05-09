@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: pellet
   tier: 4
-  prefab: {fileID: 402653652035122985, guid: eab590567d6215549aa164cfbec9adfe, type: 3}
+  prefab: {fileID: 32696097505770353, guid: 722316692e3afd24c84b8138bbdcac0d, type: 3}

@@ -97,6 +97,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private IEnumerator DelayedDestroy()
     {
         yield return new WaitForSeconds(2f);
+        GameEvents.EnemyDied(); //Notifies when an enemy dies
         Destroy(gameObject);
     }
 }

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: ammo
   tier: 2
-  prefab: {fileID: 397993045648193017, guid: a25b3723a425af04985bf9cb2f0d3334, type: 3}
+  prefab: {fileID: 6285754852136856368, guid: 34e688bbee894ff4dbe30b1880f10067, type: 3}

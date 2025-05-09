@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: noclipenergy
   tier: 5
-  prefab: {fileID: 2144972431469085049, guid: c3f9221f010963f4f843ddd81a79f043, type: 3}
+  prefab: {fileID: 7410149478916597524, guid: 11feaa90572717b46a96ca35d238471d, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: speed
   tier: 1
-  prefab: {fileID: 1246918758467806929, guid: d7c5ce0a5be36014689a9a18d764c26e, type: 3}
+  prefab: {fileID: 6584340258477869040, guid: 2c1bee23acfa0064f91a0b34bdd1293a, type: 3}

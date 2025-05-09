@@ -114,24 +114,21 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        // for (int i = 0; i < EnemiesToSpawn; i++)
-        // {
-        //     SpawnEnemy();
-        //     yield return new WaitForSeconds(0.1f);  // Time between each spawn, can be adjusted
-        // }
+        //Start Spawning more Enemies at level 2 or higher
+        if (levelManager.CurrentLevel >= 2) {
+            StartCoroutine(SpawnExtraEnemies());
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     void SpawnEnemy(PatrolRouteMono route) {
-        // int pathIndex = Random.Range(0, patrolRoutes.Length);
-        // Transform[] path = patrolRoutes[pathIndex].GetWaypoints();
-        // float difficultyNormalized = pathIndex / (float)(patrolRoutes.Length - 1);
-
+        
         Transform[] path = route?.GetWaypoints();
         bool hasRoute = path != null && path.Length > 0;
 
         float difficultyNormalized = route != null && patrolRoutes.Length > 1
             ? Mathf.Clamp01(route.distanceFromStart / maxDistance)
-            : 0f;
+            : 1f;   //wandering Enemies get max difficulty
 
         //Increase base states by 10% per level
         int level = Math.Max(1, levelManager.CurrentLevel);
@@ -172,6 +169,7 @@ public class EnemySpawner : MonoBehaviour
         else if (wanderPoints != null && wanderPoints.Length > 0) {
             int index = UnityEngine.Random.Range(0, wanderPoints.Length);
             spawnPos = wanderPoints[index].position;
+            patrolAllowed = false;  //Since it has no patrol route, no need to patrol
         }
         else {
             Debug.LogWarning("No patrol route or wander spawn point available. Enemy not spawned.");
@@ -180,7 +178,12 @@ public class EnemySpawner : MonoBehaviour
 
         // Spawn the enemy
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-        newEnemy.name = "Enemy_" + UnityEngine.Random.Range(1000, 9999);
+        if (hasRoute) {
+            newEnemy.name = "Enemy_" + UnityEngine.Random.Range(1000, 9999);
+        }
+        else {
+            newEnemy.name = "Elite_Enemy_" + UnityEngine.Random.Range(1, 99);
+        }
 
         // Set up enemy stats and path
         SmallEnemyAI ai = newEnemy.GetComponent<SmallEnemyAI>();
@@ -200,6 +203,18 @@ public class EnemySpawner : MonoBehaviour
         }
         
         Debug.Log($"Spawned enemy at {(hasRoute ? "patrol" : "wander")} route. Difficulty: {difficultyNormalized:F2}");
+    }
+
+    IEnumerator SpawnExtraEnemies() {
+        // Calculate and spawn extra enemies (wandering only)
+        int level = Mathf.Max(1, levelManager.CurrentLevel);
+        int extraEnemies = Mathf.FloorToInt((level - 1) / 2f);
+
+        for (int i = 0; i < extraEnemies; i++)
+        {
+            SpawnEnemy(null); // Passing null triggers wander spawn
+            yield return new WaitForSeconds(5f);
+        }
     }
 
     private void ScaleSize(GameObject enemy, float health, float baseHealth) {

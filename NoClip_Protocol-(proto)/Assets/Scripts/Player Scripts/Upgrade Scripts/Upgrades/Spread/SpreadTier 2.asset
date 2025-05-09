@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: spread
   tier: 2
-  prefab: {fileID: 809034063130156681, guid: befff11214a7b104cace0b47fa934c5f, type: 3}
+  prefab: {fileID: 6503413635788936976, guid: 375e0af2d659a964e9d194e714c81c27, type: 3}

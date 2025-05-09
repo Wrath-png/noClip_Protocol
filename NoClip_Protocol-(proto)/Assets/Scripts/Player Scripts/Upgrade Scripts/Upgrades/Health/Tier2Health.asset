@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: health
   tier: 2
-  prefab: {fileID: 5842622197136578323, guid: 18127f30efda35d4fbfe343440d1725f, type: 3}
+  prefab: {fileID: 1689081013967014434, guid: 90a45f232f5ed2d41813ececa5adbe6f, type: 3}

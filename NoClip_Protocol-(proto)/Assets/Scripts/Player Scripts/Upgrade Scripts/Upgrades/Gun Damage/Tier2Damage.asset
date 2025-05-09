@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: damage
   tier: 2
-  prefab: {fileID: 7680529403145111814, guid: 853665bfc6ac8324784ed3fc27bb7f73, type: 3}
+  prefab: {fileID: 3119930517671182537, guid: d2749d5db654e5c4ea5b1bfbdfa76213, type: 3}

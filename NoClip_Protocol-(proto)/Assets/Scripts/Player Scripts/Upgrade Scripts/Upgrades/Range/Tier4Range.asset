@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeID: range
   tier: 4
-  prefab: {fileID: 218070912025237117, guid: 151685bda12269d4ba87df53f7993226, type: 3}
+  prefab: {fileID: 2845826720348335155, guid: 4e73bff8c94826e47baef7035fe5fdb7, type: 3}
