@@ -11,18 +11,17 @@ public class GunSelector : MonoBehaviour
 
     [Space]
     [Header("Runtime Filled")]
-    public GunScriptableObject ActiveGun;
+    public GunRuntime ActiveGun;
 
     private void Start()
     {
         GunScriptableObject gun = Guns.Find(gun => gun.Type == Gun);
 
-        if (gameObject == null) {
+        if (gun == null) {
             Debug.LogError($"No GunScriptableObject found for GunType: {gun}");
             return;
         }
 
-        ActiveGun = gun;
-        gun.Spawn (GunParent, this);
+        ActiveGun = gun.Spawn (GunParent, this);
     }
 }

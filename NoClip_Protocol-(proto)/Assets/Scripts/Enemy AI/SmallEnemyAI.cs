@@ -34,7 +34,9 @@ public class SmallEnemyAI : MonoBehaviour
 
     public NavMeshAgent agent { get; private set; }
     public Transform player { get; private set; }
-
+    public AudioSource smallEnemySound;
+    public AudioClip drone;
+    public AudioClip explode;
     private EnemyState currentState;
     private int currentWaypointIndex;
     private float waitCounter = 0f;
@@ -57,6 +59,10 @@ public class SmallEnemyAI : MonoBehaviour
         head = transform.Find("ProtoEnemy");
         player = GameObject.Find("RagequitPlayer").transform;
         attack = GetComponent<EnemyAttack>();
+        smallEnemySound = GetComponent<AudioSource>();
+        smallEnemySound.clip = drone;
+        smallEnemySound.loop = true;
+        smallEnemySound.Play();
     }
 
     public void SetPatrolPath(Transform[] newPath) {
@@ -125,13 +131,6 @@ public class SmallEnemyAI : MonoBehaviour
                     ChangeAnimation(idleState);     //Ends look around animation 
                     return true;
                 }
-                // If the ray reaches the player, return true
-                //lastSeenTime = Time.time;
-                //if(!chasing) {
-                //agent.isStopped = false;
-                //ChangeAnimation(idleState);     //Ends look around animation 
-                //transform.LookAt(player);       //Makes enemy look at player to ensure attention is not lost
-                //chasing = true;                 //Sets chasing to true so that it doesn't restart the patrol
             }
         }
         return false;   //Player not in field of vision.
@@ -238,13 +237,6 @@ public class SmallEnemyAI : MonoBehaviour
             wandering = true;
             agent.SetDestination(wanderPos);
         }
-
-        // float distanceToMove = Vector3.Distance(FlatPosition(transform.position), FlatPosition(wanderPos));
-
-        // //WanderPosition reached
-        // if(distanceToMove < 1f) {
-        //     Debug.Log("Reached Wander Location");
-        // }
     }
     public bool AtWanderPoint() {
         Vector3 flatPosition = FlatPosition(transform.position);
@@ -269,12 +261,12 @@ public class SmallEnemyAI : MonoBehaviour
         wanderPos = new Vector3(transform.position.x + randomX, 0f, transform.position.z + randomZ);
         if (Physics.Raycast(transform.position, (wanderPos - transform.position).normalized, wanderRadius, whatIsWall)) 
         {
-            Debug.Log("Wall detected! Not moving this frame.");
+            //Debug.Log("Wall detected! Not moving this frame.");
             return; // Exit without changing position
         }
     
         // No wall detected, proceed with movement
-        Debug.Log("Safe path. Moving to wander position.");
+        //Debug.Log("Safe path. Moving to wander position.");
         Debug.DrawRay(transform.position, (wanderPos - transform.position).normalized * wanderRadius, Color.green, 1f);
         wanderPointSet = true;
     }

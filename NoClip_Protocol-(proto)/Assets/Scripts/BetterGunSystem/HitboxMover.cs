@@ -5,6 +5,9 @@ using UnityEngine.Rendering.Universal.Internal;
 public class HitboxMover : MonoBehaviour
 {
     private GameObject owner;
+    public AudioSource laserSource;
+    public AudioClip laserSound;
+    public AudioClip laserHit;
     private DamageConfigScriptableObject damageConfig;
     private Vector3 direction;
     private float speed;
@@ -23,6 +26,8 @@ public class HitboxMover : MonoBehaviour
         this.damageMult = multiplier;
 
         transform.position = start;
+        laserSource.PlayOneShot(laserSound);
+
     }
 
     public void SetOwner(GameObject owner) {
@@ -49,10 +54,9 @@ public class HitboxMover : MonoBehaviour
 
         // Avoid self-hit or friendly fire
         if (other.gameObject == owner || other.transform.IsChildOf(owner.transform))
-        {
             return;
-        }
-
+        
+        laserSource.PlayOneShot(laserHit);
         hasCollided = true;
         int finalDamage = Mathf.RoundToInt(damageMult * damageConfig.GetDamage(1f));
 

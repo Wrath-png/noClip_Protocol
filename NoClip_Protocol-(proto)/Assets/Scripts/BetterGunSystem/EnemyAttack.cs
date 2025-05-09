@@ -9,6 +9,8 @@ public class EnemyAttack : MonoBehaviour
     {
         if (gunSelector.ActiveGun != null) {
             SmallEnemyAI enemyAI = GetComponentInParent<SmallEnemyAI>();  // Assuming SmallEnemyAI is on the same GameObject or parent
+            Debug.Log($"Attacking with gun: {gunSelector.ActiveGun.name}, Enemy: {enemyAI.gameObject.name}");
+
             if (enemyAI != null) {
         
                 gunSelector.ActiveGun.Shoot(enemyAI.GetDamageMultiplier());

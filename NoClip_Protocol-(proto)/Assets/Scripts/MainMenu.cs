@@ -5,8 +5,9 @@ public class MainMenu : MonoBehaviour
 {
     
     private static MainMenu instance;
+    public static MainMenu Instance => instance;
     private GameObject prevMenu;
-    public GameObject mainMenuUI, pauseMenuUI, pauseBlurVolume, optionsMenuUI, optionsBackground; // Assign the menu panel here
+    public GameObject mainMenuUI, pauseMenuUI, pauseBlurVolume, optionsMenuUI, deathMenuUI, optionsBackground; // Assign the menu panel here
     public static bool IsPaused { get; private set; } = false;
     private bool isPaused = false;
     public BGM bgm;
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour
     pauseMenuUI.SetActive(false);
     optionsMenuUI.SetActive(false);
     mainMenuUI.SetActive(true);
+    deathMenuUI.SetActive(false);
     Time.timeScale = 1f;
     }
 
@@ -45,6 +47,15 @@ public class MainMenu : MonoBehaviour
 
         pauseBlurVolume.SetActive(isPaused);
     }
+
+    public void ShowDeathMenu()
+    {
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        deathMenuUI.SetActive(true);
+    }
+    
     public void ResumeGame()
     {
         isPaused = false;
@@ -59,7 +70,7 @@ public class MainMenu : MonoBehaviour
 
     //Loads up the game
     public void Play() {
-        bgm.SetMusic("Kaixo - Mystic");
+        bgm.SetMusic("suspense-sci-fi");
         LevelManager.Instance.ResetLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         mainMenuUI.SetActive(false);
@@ -69,6 +80,12 @@ public class MainMenu : MonoBehaviour
     public void Quit() {
         Application.Quit();
         Debug.Log("Player Has Closed The Game");
+    }
+
+    //Restarts the game
+    public void DeathRestart() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 
     public void OpenOptionsFromMain() {
@@ -87,5 +104,21 @@ public class MainMenu : MonoBehaviour
         optionsMenuUI.SetActive(false);
         if (prevMenu != null)
             prevMenu.SetActive(true);
+    }
+
+    void OnEnable() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0) {
+            Destroy(gameObject);
+            return;
+        }
     }
 }

@@ -13,6 +13,13 @@ TagManager:
   - button f6
   - Enemy
   - Practice Dummy
+  - NoClipWall
+  - PlayerSpawn
+  - UpSpawn
+  - PatrolPoint
+  - WanderPoint
+  - LevelCount
+  - DoorButton
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] private int _MaxHealth = 30;
     [SerializeField] private int _Health;
     private EnemyHealthBar healthBar;
+    public AudioSource smallEnemySound;
+    public AudioSource fxSource;
+    public AudioClip explosion;
+    public AudioClip damageSound;
 
     public int CurrentHealth { get => _Health; private set => _Health = value; }
 
@@ -34,6 +38,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage(int Damage)
     {
+        fxSource.PlayOneShot(damageSound);
+
         int damageTaken = Mathf.Clamp(Damage, 0, CurrentHealth);
 
         CurrentHealth -= damageTaken;
@@ -50,6 +56,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     }
 
     private void HandleDeath() {
+        smallEnemySound.clip = explosion;
+        smallEnemySound.loop = false;
+        smallEnemySound.Play();
+
         // Disable NavMeshAgent
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         if (agent != null) agent.enabled = false;
