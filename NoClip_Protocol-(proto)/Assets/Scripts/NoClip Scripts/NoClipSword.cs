@@ -3,12 +3,19 @@ using UnityEngine;
 public class NoClipSword : MonoBehaviour
 {
     public Animator swordAnimator;
+    public AudioSource soundSource;
+    public AudioClip swordSound;
     public int damage = 50;
 
+    void Start()
+    {
+        soundSource = GetComponent<AudioSource>();
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Left mouse button
         {
+            soundSource.PlayOneShot(swordSound);
             swordAnimator.SetTrigger("Swing");
         }
     }
