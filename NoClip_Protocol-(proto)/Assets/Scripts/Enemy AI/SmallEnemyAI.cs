@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UI;
 
 //Will contain the AI for the easy enemies. They will travel from waypoint to waypoint but stop and shoot at the player if they see them.
 public class SmallEnemyAI : MonoBehaviour

@@ -1,4 +1,3 @@
-using UnityEngine;
 
 // ChaseState.cs
 public class ChaseState : EnemyState

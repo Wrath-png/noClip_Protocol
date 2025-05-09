@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {

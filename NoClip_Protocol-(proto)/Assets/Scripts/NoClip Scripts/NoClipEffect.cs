@@ -79,6 +79,7 @@ public class NoClipEffect : MonoBehaviour
     public void Activate() {
         noClipStartPosition = transform.position;
         NoClipToggle(true);
+        Time.timeScale = 0.7f;
         controller.enabled = false;
         foreach (var pair in originalMaterials)
         {
@@ -86,6 +87,7 @@ public class NoClipEffect : MonoBehaviour
         }
     }
     public void Deactivate() {
+        Time.timeScale = 1f;
         if (isInNullZone) {
             Debug.Log("Exited NoClip in restricted zone");
             StartCoroutine(RevertPosition(noClipStartPosition));
